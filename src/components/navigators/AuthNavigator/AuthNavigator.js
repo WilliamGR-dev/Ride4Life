@@ -19,10 +19,7 @@ const AuthNavigator = () => {
         name="AuthForgotPassword"
         component={AuthForgotPasswordScreen}
       />
-      <Stack.Screen
-        name="AuthRegister"
-        component={AuthRegisterScreen}
-      />
+      <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} />
     </Stack.Navigator>
   );
 };

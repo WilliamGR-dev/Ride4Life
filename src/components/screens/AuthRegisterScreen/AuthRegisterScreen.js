@@ -28,8 +28,10 @@ const AuthRegisterScreen = props => {
   return (
     <ScrollView scrollEnabled={false} style={styles.screen}>
       <View style={styles.container}>
-        <View style={styles.section}>
+        <View style={styles.goBackBtn}>
           <BackPressButton />
+        </View>
+        <View style={styles.section}>
           <Text style={styles.sectionText}>
             {t('auth_register_screen.title')}
           </Text>
@@ -79,6 +81,8 @@ const AuthRegisterScreen = props => {
             width={'80%'}
             disabled={!email || !password}
             isSubmitting={isSubmitting}
+            text_outline
+            dark
           />
         </View>
       </View>

@@ -10,6 +10,10 @@ const useNavigator = () => {
     navigation.goBack();
   }, [navigation]);
 
+  const goToMap = useCallback(() => {
+    navigation.navigate('Map', {});
+  }, [navigation]);
+
   const goToAuthLogin = useCallback(() => {
     navigation.navigate('AuthLogin', {});
   }, [navigation]);
@@ -127,6 +131,7 @@ const useNavigator = () => {
 
   return {
     goBack,
+    goToMap,
     goToAuthLogin,
     goToAuthForgotPassword,
     goToAuthRegister,

@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
+    backgroundColor: '#ffffff'
   },
   btn: {
     flex: 1,
@@ -12,17 +13,17 @@ export default StyleSheet.create({
   btnImage: {
     height: 26,
     width: 26,
-    tintColor: '#FFF',
+    tintColor: '#c5c5c5',
   },
   btnImageFocused: {
-    tintColor: '#FFF',
+    tintColor: '#5597c7',
   },
   btnLabel: {
-    color: '#FFF',
+    color: '#c5c5c5',
     fontSize: 11,
     marginTop: 3,
   },
   btnLabelFocused: {
-    color: '#FFF',
+    color: '#5597c7',
   },
 });

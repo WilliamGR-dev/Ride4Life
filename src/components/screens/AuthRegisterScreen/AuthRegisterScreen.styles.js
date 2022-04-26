@@ -3,19 +3,18 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#F6F6F6',
+    backgroundColor: '#FFFFFF',
   },
   container: {
     flex: 1,
     alignItems: 'center',
   },
   section: {
-    width: '80%',
+    width: '100%',
     backgroundColor: '#FFFFFF',
     borderRadius: 27,
-    marginTop: 50,
+    marginTop: 20,
     alignItems: 'center',
-    paddingVertical: 40,
   },
   sectionText: {
     fontSize: 20,
@@ -24,11 +23,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   goBackBtn: {
-    marginTop: 15,
-  },
-  goBackText: {
-    color: '#000000',
-    textDecorationLine: 'underline',
+    alignItems: 'flex-start',
+    width: '90%',
   },
   input: {
     width: '80%',

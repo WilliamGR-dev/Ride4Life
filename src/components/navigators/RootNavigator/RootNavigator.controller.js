@@ -14,11 +14,11 @@ const useController = ({}) => {
   }, []);
 
   useEffect(() => {
-    if (!userAuth || userAuth.type !== 'sampler') {
+    if (!userAuth) {
       return;
     }
 
-    refreshUserProfileData();
+    // refreshUserProfileData();
   }, [userAuth]);
   return {userAuth, app, userProfile};
 };

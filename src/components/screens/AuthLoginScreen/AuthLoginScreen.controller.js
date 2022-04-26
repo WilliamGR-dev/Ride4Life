@@ -3,11 +3,16 @@ import {Linking} from 'react-native';
 
 import Config from '../../../config';
 
-import {useDoubleBackPressExit, usePreventMultipleSubmit} from '../../../hooks';
+import {
+  useDoubleBackPressExit,
+  useNavigator,
+  usePreventMultipleSubmit,
+} from '../../../hooks';
 
 import apiHelper from '../../../helpers/apiHelper';
 import authService from '../../../services/authService';
 import alertHelper from '../../../helpers/alertHelper';
+import {dispatch, store} from '../../../redux/store';
 
 const useController = ({}) => {
   useDoubleBackPressExit();
@@ -19,19 +24,23 @@ const useController = ({}) => {
   const [isSubmitting, preventMultipleSubmit] = usePreventMultipleSubmit();
 
   const submit = useCallback(async () => {
-    await preventMultipleSubmit(async () => {
-      const res = await apiHelper.login(username, password);
-
-      if (res.status !== 200) {
-        return setHasError(true);
-      }
-
-      if (res.content.type !== 'sampler') {
-        return alertHelper.informAccountNotSampler();
-      }
-
-      await authService.login(res.content);
+    dispatch('userAuth', {
+      true: true,
     });
+    console.log(store.getState().userAuth);
+    // await preventMultipleSubmit(async () => {
+    //   const res = await apiHelper.login(username, password);
+    //
+    //   if (res.status !== 200) {
+    //     return setHasError(true);
+    //   }
+    //
+    //   if (res.content.type !== 'sampler') {
+    //     return alertHelper.informAccountNotSampler();
+    //   }
+    //
+    //   await authService.login(res.content);
+    // });
   }, [password, preventMultipleSubmit, username]);
 
   const linkToRegister = useCallback(() => {

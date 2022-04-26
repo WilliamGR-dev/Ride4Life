@@ -10,12 +10,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   section: {
-    width: '90%',
+    width: '100%',
     backgroundColor: '#FFFFFF',
     borderRadius: 27,
-    marginTop: 50,
+    marginTop: 20,
     alignItems: 'center',
-    paddingVertical: 40,
   },
   sectionText: {
     fontSize: 20,
@@ -42,11 +41,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   goBackBtn: {
-    marginTop: 15,
-  },
-  goBackText: {
-    color: '#000000',
-    textDecorationLine: 'underline',
+    alignItems: 'flex-start',
+    width: '90%',
   },
 });
 

@@ -14,6 +14,7 @@ import AuthNavigator from '../AuthNavigator/AuthNavigator';
 // import LoadingIndicator from '../../others/LoadingIndicator/LoadingIndicator';
 
 import useController from './RootNavigator.controller';
+import AppNavigator from '../AppNavigator/AppNavigator';
 
 export const navigationRef = createNavigationContainerRef();
 
@@ -22,7 +23,11 @@ const RootNavigator = props => {
 
   let NavComponent;
   let navComponentProps;
-
+  if (!userAuth) {
+    NavComponent = AuthNavigator;
+  } else {
+    NavComponent = AppNavigator;
+  }
   // if (app && !app.isIntroScreenShowed) {
   //   NavComponent = IntroScreen;
   // } else if (!userAuth) {
@@ -48,8 +53,6 @@ const RootNavigator = props => {
   // } else {
   //   NavComponent = AppNavigator;
   // }
-
-  NavComponent = AuthNavigator;
 
   return (
     <NavigationContainer ref={navigationRef}>

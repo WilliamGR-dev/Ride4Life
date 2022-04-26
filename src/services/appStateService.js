@@ -27,7 +27,7 @@ const onAppStateBackToForeground = async () => {
 
   const {userAuth} = store.getState();
 
-  if (userAuth && userAuth.type === 'sampler') {
+  if (userAuth) {
     // await sessionService.refreshCurrentSession();
   }
 };

@@ -29,9 +29,7 @@ export default props => {
   };
 
   const renderRefreshControl = () => {
-    return (
-      <View></View>
-    );
+    return <View />;
   };
 
   if (!props.data) {

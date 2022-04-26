@@ -1,32 +1,3 @@
-import PhoneNumber from 'awesome-phonenumber';
-
-export const validateAndNormalizePhoneNumber = (value, country) => {
-  try {
-    const number = value.replace(/^00/, '+');
-
-    let pn = new PhoneNumber(number, country || 'FR');
-
-    if (country && pn.getRegionCode() && country !== pn.getRegionCode()) {
-      pn = new PhoneNumber(pn.getNumber('national'), country);
-    }
-
-    return pn.getNumber('e164');
-  } catch (err) {
-    return null;
-  }
-};
-
-export const getRegionCodeFromPhoneNumber = value => {
-  try {
-    const number = value.replace(/^00/, '+');
-    let pn = new PhoneNumber(number);
-
-    return pn.getRegionCode();
-  } catch (err) {
-    return null;
-  }
-};
-
 export const validatePassword = value => {
   return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(value);
 };
@@ -43,8 +14,6 @@ export const validateEmail = value => {
 };
 
 export default {
-  validateAndNormalizePhoneNumber,
-  getRegionCodeFromPhoneNumber,
   validatePassword,
   validateNir,
   validateEmail,

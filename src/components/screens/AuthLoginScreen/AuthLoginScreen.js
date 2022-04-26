@@ -33,8 +33,10 @@ const AuthLoginScreen = props => {
       style={styles.screen}
       testID="AuthLoginScreen">
       <View style={styles.container}>
-        <View style={styles.section}>
+        <View style={styles.goBackBtn}>
           <BackPressButton />
+        </View>
+        <View style={styles.section}>
           <Text style={styles.sectionText}>{t('auth_login_screen.title')}</Text>
           <AuthTextInput
             testID="AuthLoginScreen.email"
