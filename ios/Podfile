@@ -19,6 +19,10 @@ target 'Ride4Life' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
+  pod 'RNSensors', :path => '../node_modules/react-native-sensors'
+
   target 'Ride4LifeTests' do
     inherit! :complete
     # Pods for testing
