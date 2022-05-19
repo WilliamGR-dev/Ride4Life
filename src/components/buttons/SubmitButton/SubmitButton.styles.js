@@ -37,6 +37,15 @@ const styles = StyleSheet.create({
   red: {
     backgroundColor: '#ec2323',
   },
+  road_trip: {
+    backgroundColor: '#282a2e',
+    borderRadius: 12,
+  },
+  text_road_trip: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });
 
 export default styles;

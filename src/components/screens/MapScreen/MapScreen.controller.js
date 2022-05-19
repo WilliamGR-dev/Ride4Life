@@ -17,6 +17,7 @@ let fallingDate = null;
 const useController = ({}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPermissionAuthorized, setIsPermissionAuthorized] = useState(false);
+  const [isSearching, setSearching] = useState(false);
   const [currentPosition, setCurrentPosition] = useState();
   const [destination, setDestination] = useState();
   const [destinationPlaceId, setDestinationPlaceId] = useState(null);
@@ -63,10 +64,10 @@ const useController = ({}) => {
   useEffect(() => {
     requestPermission();
     refreshUserProfileData();
-    const sub = checkIfFall();
+    //const sub = checkIfFall();
 
     return () => {
-      sub && sub.unsubscribe();
+      //sub && sub.unsubscribe();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -118,6 +119,8 @@ const useController = ({}) => {
     onChangeDestination,
     destinationPlaceId,
     setDestinationPlaceId,
+    isSearching,
+    setSearching,
   };
 };
 

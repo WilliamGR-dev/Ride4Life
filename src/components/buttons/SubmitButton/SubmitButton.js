@@ -17,6 +17,9 @@ const SubmitButton = props => {
     style = styles.light_outline;
   } else if (props.red) {
     style = styles.red;
+  } else if (props.road_trip) {
+    style = styles.road_trip;
+    text = styles.text_road_trip;
   }
   return (
     <TouchableOpacity

@@ -22,6 +22,22 @@ const useNavigator = () => {
     navigation.navigate('AuthForgotPassword', {});
   }, [navigation]);
 
+  const goToRoadTrip = useCallback(() => {
+    navigation.navigate('RoadTrip', {});
+  }, [navigation]);
+
+  const goToComment = useCallback(() => {
+    navigation.navigate('Comment', {});
+  }, [navigation]);
+
+  const goToPostNews = useCallback(() => {
+    navigation.navigate('PostNews', {});
+  }, [navigation]);
+
+  const PostRoadTrip = useCallback(() => {
+    navigation.navigate('PostRoadTrip', {});
+  }, [navigation]);
+
   const goToAuthRegister = useCallback(() => {
     navigation.navigate('AuthRegister', {});
   }, [navigation]);
@@ -134,6 +150,10 @@ const useNavigator = () => {
     goToMap,
     goToAuthLogin,
     goToAuthForgotPassword,
+    goToRoadTrip,
+    goToComment,
+    goToPostNews,
+    PostRoadTrip,
     goToAuthRegister,
     goToSidepForm,
     goToChatHome,

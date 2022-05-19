@@ -1,11 +1,20 @@
 import React from 'react';
-import {View, StyleSheet, TouchableHighlight, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import FormTextInput from '../../inputs/FormTextInput/FormTextInput';
 import MapViewDirections from 'react-native-maps-directions';
 import {useNavigator} from '../../../hooks';
 
 import useController from './MapScreen.controller';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,20 +29,58 @@ const styles = StyleSheet.create({
   },
   placeview: {
     position: 'absolute',
-    top: 10,
+    padding: 5,
     zIndex: 4,
+    backgroundColor: '#ffffff',
+    height: '100%',
+    width: '100%',
+  },
+  searchHeader: {
+    flexDirection: 'row',
   },
   destination: {
+    width: '80%',
     marginBottom: '8%',
     height: '10%',
+  },
+  suggestionsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   suggestions: {
     backgroundColor: 'white',
     padding: 5,
     fontSize: 18,
-    borderWidth: 0.5,
     marginLeft: 5,
     marginRight: 5,
+  },
+  informationContainer: {
+    width: '90%',
+    paddingBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  locationImage: {
+    height: 21,
+    width: 16,
+  },
+  searchButton: {
+    backgroundColor: '#ffffff',
+    borderRadius: 32,
+    padding: 10,
+    height: 64,
+    width: 64,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  speedContainer: {
+    backgroundColor: '#ffffff',
+    borderRadius: 32,
+    padding: 10,
+    height: 64,
+    width: 64,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -289,41 +336,59 @@ const MapScreen = props => {
     setPredictions,
     destinationPlaceId,
     setDestinationPlaceId,
+    isSearching,
+    setSearching,
   } = useController(props);
 
   const {} = useNavigator();
 
   const predictionsView = predictions.map(prediction => (
-    <TouchableHighlight
+    <TouchableOpacity
       onPress={() => {
         setDestinationPlaceId(prediction.place_id);
         setDestination(prediction.description);
         setPredictions([]);
+        setSearching(false);
       }}
       key={prediction.place_id}>
-      <View>
+      <View style={styles.suggestionsContainer}>
+        <Image
+          style={styles.locationImage}
+          source={require('../../../assets/images/icons/location-dot-solid.png')}
+        />
         <Text style={styles.suggestions}>
           {prediction.structured_formatting.main_text}
+          {prediction.structured_formatting.secondary_text}
         </Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   ));
 
   return (
     <View style={styles.container}>
-      <View style={styles.placeview}>
-        <FormTextInput
-          style={styles.destination}
-          value={destination}
-          onChangeText={value => {
-            console.log(value);
-            setDestination(value);
-            onChangeDestination(value);
-          }}
-          placeholder="Votre destination"
-        />
-        {predictionsView}
-      </View>
+      {isSearching && (
+        <View style={styles.placeview}>
+          <View style={styles.searchHeader}>
+            <TouchableOpacity
+              onPress={() => {
+                setSearching(false);
+              }}>
+              <MaterialIcons name={'arrow-back'} size={40} />
+            </TouchableOpacity>
+            <FormTextInput
+              style={styles.destination}
+              value={destination}
+              onChangeText={value => {
+                console.log(value);
+                setDestination(value);
+                onChangeDestination(value);
+              }}
+              placeholder="Votre destination"
+            />
+          </View>
+          {predictionsView}
+        </View>
+      )}
       {isPermissionAuthorized && currentPosition && (
         <>
           <MapView
@@ -351,9 +416,20 @@ const MapScreen = props => {
               />
             )}
           </MapView>
-          <Text>
-            SPEED : {Math.round(currentPosition.coords.speed) * 3.6} Km/h
-          </Text>
+          <View style={styles.informationContainer}>
+            <View style={styles.searchButton}>
+              <TouchableOpacity
+                onPress={() => {
+                  setSearching(true);
+                }}>
+                <FontAwesome size={32} name={'search'} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.speedContainer}>
+              <Text>{Math.round(currentPosition.coords.speed) * 3.6}</Text>
+              <Text>Km/h</Text>
+            </View>
+          </View>
         </>
       )}
     </View>

@@ -625,4 +625,7 @@ module.exports = {
     more: 'Voir plus',
     less: 'Voir moins',
   },
+  roads_screen: {
+    title: 'Roads Trips',
+  },
 };

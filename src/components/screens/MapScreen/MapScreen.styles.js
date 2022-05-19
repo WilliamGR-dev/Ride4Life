@@ -27,15 +27,15 @@ const styles = StyleSheet.create({
   },
   name: {
     textAlign: 'center',
-    marginBottom: 5
+    marginBottom: 5,
   },
   join_date: {
     textAlign: 'center',
-    marginBottom: 5
+    marginBottom: 5,
   },
   account_container: {
     borderWidth: 1,
-    borderColor: "rgba(83,83,83,0.4)",
+    borderColor: 'rgba(83,83,83,0.4)',
     paddingHorizontal: 20,
   },
   button_container: {

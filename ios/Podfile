@@ -23,6 +23,10 @@ target 'Ride4Life' do
 
   pod 'RNSensors', :path => '../node_modules/react-native-sensors'
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   target 'Ride4LifeTests' do
     inherit! :complete
     # Pods for testing
