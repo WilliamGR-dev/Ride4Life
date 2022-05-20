@@ -49,6 +49,15 @@ const PostRoadTripScreen = props => {
     setTitle,
     roadTrip,
     createStep,
+    setDestination,
+    onChangeDestination,
+    predictions,
+    setRoadMapPlaceId,
+    setPredictions,
+    InputSelected,
+    setInputSelected,
+    refreshing,
+    onRefresh,
   } = useController(props);
 
   const renderImagePicker = () => {
@@ -165,18 +174,98 @@ const PostRoadTripScreen = props => {
     );
   };
 
+  const predictionsView = predictions.map(prediction => (
+    <TouchableOpacity
+      onPress={() => {
+        setRoadMapPlaceId(prediction);
+        setPredictions([]);
+        setInputSelected(null);
+      }}
+      key={prediction.place_id}>
+      <View style={styles.suggestionsContainer}>
+        <Image
+          style={styles.locationImage}
+          source={require('../../../assets/images/icons/location-dot-solid.png')}
+        />
+        <Text style={styles.suggestions}>
+          {prediction.structured_formatting.main_text}
+          {prediction.structured_formatting.secondary_text}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  ));
+
   const renderItem = ({item}) => {
-    return (
-      <FormTextInput
-        style={styles.destination}
-        value={title}
-        onChangeText={value => {
-          setTitle(value);
-        }}
-        placeholder="Votre description"
-        label="Description"
-      />
-    );
+    console.log(roadTrip);
+    if (roadTrip.indexOf(item) === 0) {
+      return (
+        <View>
+          {InputSelected === roadTrip.indexOf(item) ||
+          InputSelected === null ? (
+            <FormTextInput
+              onFocus={setInputSelected(roadTrip.indexOf(item))}
+              style={styles.destination}
+              value={roadTrip[roadTrip.indexOf(item)].input}
+              onChangeText={value => {
+                setDestination(value, roadTrip.indexOf(item));
+                onChangeDestination(value);
+              }}
+              placeholder="Depart"
+              label="Depart"
+            />
+          ) : undefined}
+          {InputSelected === roadTrip.indexOf(item)
+            ? predictionsView
+            : undefined}
+        </View>
+      );
+    } else if (roadTrip.indexOf(item) === roadTrip.length - 1) {
+      return (
+        <View>
+          {InputSelected === roadTrip.indexOf(item) ||
+          InputSelected === null ? (
+            <FormTextInput
+              onFocus={setInputSelected(roadTrip.indexOf(item))}
+              style={styles.destination}
+              value={roadTrip[roadTrip.indexOf(item)].input}
+              onChangeText={value => {
+                setDestination(value, roadTrip.indexOf(item));
+                onChangeDestination(value);
+              }}
+              placeholder="Arrivée"
+              label="Arrivée"
+            />
+          ) : undefined}
+
+          {InputSelected === roadTrip.indexOf(item)
+            ? predictionsView
+            : undefined}
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          {InputSelected === roadTrip.indexOf(item) ||
+          InputSelected === null ? (
+            <FormTextInput
+              onFocus={setInputSelected(roadTrip.indexOf(item))}
+              style={styles.destination}
+              value={roadTrip[roadTrip.indexOf(item)].input}
+              onChangeText={value => {
+                setDestination(value, roadTrip.indexOf(item));
+                onChangeDestination(value);
+              }}
+              placeholder="Votre Etape"
+              label="Etape"
+            />
+          ) : undefined}
+
+          {InputSelected === roadTrip.indexOf(item)
+            ? predictionsView
+            : undefined}
+        </View>
+      );
+    }
   };
 
   return (
@@ -207,6 +296,15 @@ const PostRoadTripScreen = props => {
         placeholder="Votre description"
         label="Description"
       />
+      <FormTextInput
+        style={styles.destination}
+        value={title}
+        onChangeText={value => {
+          setTitle(value);
+        }}
+        placeholder="Votre petite description"
+        label="Petite description"
+      />
       <View>
         <Text>Itineraires</Text>
         <TouchableOpacity onPress={createStep}>
@@ -215,9 +313,11 @@ const PostRoadTripScreen = props => {
         <View>
           <SuperFlatList
             data={roadTrip}
-            keyExtractor={item => item.id}
+            keyExtractor={item => roadTrip.indexOf(item)}
             renderItem={renderItem}
             style={styles.list}
+            isRefreshing={refreshing}
+            onRefresh={onRefresh}
           />
         </View>
       </View>

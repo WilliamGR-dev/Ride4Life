@@ -4,10 +4,8 @@ import {useRefresh} from '../../../hooks';
 
 const useController = ({}) => {
   const [data, setData] = useState(null);
-  const [username, setUsername] = useState('Spartan_25');
-  const [firstname, setFirstname] = useState('William');
-  const [lastname, setLastname] = useState('Girard-Reydet');
-  const [email, setEmail] = useState('wgirardreydet@gmail.com');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [password, setPassword] = useState('');
 
   const loadNews = useCallback(async () => {
     // const res = await apiHelper.getNews();
@@ -55,14 +53,10 @@ const useController = ({}) => {
     data,
     refreshing,
     onRefresh,
-    username,
-    setUsername,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    email,
-    setEmail,
+    passwordConfirm,
+    setPasswordConfirm,
+    password,
+    setPassword,
   };
 };
 

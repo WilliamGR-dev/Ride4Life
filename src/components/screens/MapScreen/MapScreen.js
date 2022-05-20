@@ -379,7 +379,6 @@ const MapScreen = props => {
               style={styles.destination}
               value={destination}
               onChangeText={value => {
-                console.log(value);
                 setDestination(value);
                 onChangeDestination(value);
               }}

@@ -16,14 +16,7 @@ import {useNavigator} from '../../../hooks';
 const NewsScreen = props => {
   const {goToPostNews} = useNavigator();
 
-  const {
-    data,
-    refreshing,
-    onRefresh,
-    hasPermission,
-    requestPermissions,
-    canShowCamera,
-  } = useController(props);
+  const {data, refreshing, onRefresh} = useController(props);
 
   if (!data) {
     return <LoadingIndicator full />;

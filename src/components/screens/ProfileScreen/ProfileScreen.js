@@ -1,47 +1,54 @@
 import React from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Image} from 'react-native';
 
 import styles from './ProfileScreen.styles';
 
 import {useNavigator} from '../../../hooks';
 
 import useController from './ProfileScreen.controller';
-import SubmitButton from "../../buttons/SubmitButton/SubmitButton";
+import SubmitButton from '../../buttons/SubmitButton/SubmitButton';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const ProfileScreen = props => {
   const {logout} = useController(props);
 
-  const {} = useNavigator();
+  const {goToUpdateProfile, goToUpdatePassword} = useNavigator();
 
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <View style={styles.profile}>
-          <View style={styles.container_picture}>
-            <Text style={styles.profile_picture}>W</Text>
-          </View>
-          <Text style={styles.name}>William</Text>
-          <Text style={styles.join_date}>Joined 26 avr. 2022</Text>
+    <View style={styles.screen}>
+      <View style={styles.profile}>
+        <View style={styles.container_picture}>
+          <Image
+            style={styles.profile_picture}
+            source={{
+              uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
+            }}
+          />
         </View>
-        <View style={styles.account_container}>
-          <Text style={styles.title_container}>Account</Text>
-          <Text style={styles.button_container}>Account Information</Text>
-          <Text style={styles.button_container}>Change Password</Text>
-        </View>
-        <View style={styles.account_container}>
-          <Text style={styles.title_container}>Settings</Text>
-          <Text style={styles.button_container}>FAQ</Text>
-          <Text style={styles.button_container}>Contact Us</Text>
-          <Text style={styles.button_container}>Terms and Conditions</Text>
-          <Text style={styles.button_container}>Privacy Policy</Text>
-          <TouchableOpacity
-              onPress={logout}>
-            <Text style={styles.button_container}>Logout</Text>
-          </TouchableOpacity>
-        </View>
-        <Text>Rider4Life</Text>
+        <Text style={styles.name}>William</Text>
+        <Text style={styles.join_date}>Rejoint le 26 avr. 2022</Text>
       </View>
-    </ScrollView>
+      <View style={styles.account_container}>
+        <TouchableOpacity
+          style={styles.button_container}
+          onPress={goToUpdateProfile}>
+          <Feather size={26} name={'user'} />
+          <Text style={styles.title_container}>Mon profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button_container}
+          onPress={goToUpdatePassword}>
+          <FontAwesome size={26} name={'cog'} />
+          <Text style={styles.title_container}>Modifier le mot de passe</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button_container} onPress={logout}>
+          <MaterialIcons size={26} name={'logout'} />
+          <Text style={styles.title_container}>Déconnexion</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 

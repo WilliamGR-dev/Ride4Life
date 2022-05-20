@@ -10,6 +10,7 @@ import useController from './AppNavigator.controller';
 import CommentScreen from '../../screens/CommentScreen/CommentScreen';
 import PostNewsScreen from '../../screens/PostNewsScreen/PostNewsScreen';
 import PostRoadTripScreen from '../../screens/PostRoadTripScreen/PostRoadTripScreen';
+import UpdatePasswordScreen from '../../screens/UpdatePasswordScreen/UpdatePasswordScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const AppNavigator = props => {
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
 
       <Stack.Screen name="UpdateProfile" component={UpdateProfileScreen} />
+      <Stack.Screen name="UpdatePassword" component={UpdatePasswordScreen} />
       <Stack.Screen name="RoadTrip" component={RoadScreen} />
       <Stack.Screen name="Comment" component={CommentScreen} />
       <Stack.Screen name="PostNews" component={PostNewsScreen} />

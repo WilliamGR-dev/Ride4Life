@@ -13,6 +13,23 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   check: {},
+  locationImage: {
+    height: 21,
+    width: 16,
+  },
+  suggestionsContainer: {
+    backgroundColor: '#ffffff',
+    zIndex: 99,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  suggestions: {
+    backgroundColor: 'white',
+    padding: 5,
+    fontSize: 18,
+    marginLeft: 5,
+    marginRight: 5,
+  },
   owner: {
     marginTop: 10,
     flexDirection: 'row',

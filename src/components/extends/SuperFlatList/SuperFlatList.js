@@ -50,6 +50,7 @@ export default props => {
 
   return (
     <FlatList
+      showsVerticalScrollIndicator={false}
       keyExtractor={(item, index) => index.toString()}
       onEndReachedThreshold={1}
       scrollEventThrottle={16}

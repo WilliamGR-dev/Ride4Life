@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: '#ffffff',
+    height: '100%',
+    bottom: 1,
   },
   profile: {
     padding: 40,
@@ -15,36 +17,42 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyItems: 'center',
     alignItems: 'center',
-    width: 64,
-    height: 64,
-    backgroundColor: '#b3b3b3',
+    width: 128,
+    height: 128,
     justifyContent: 'center',
     borderRadius: 50,
   },
   profile_picture: {
-    fontSize: 32,
-    fontWeight: '500',
+    width: 128,
+    height: 128,
+    borderRadius: 80,
+    padding: 20,
   },
   name: {
     textAlign: 'center',
-    marginBottom: 5
+    marginBottom: 5,
   },
   join_date: {
     textAlign: 'center',
-    marginBottom: 5
+    marginBottom: 5,
   },
   account_container: {
-    borderWidth: 1,
-    borderColor: "rgba(83,83,83,0.4)",
+    borderColor: 'rgba(83,83,83,0.4)',
     paddingHorizontal: 20,
   },
   button_container: {
     paddingVertical: 10,
+    paddingLeft: 50,
     fontSize: 18,
     color: 'black',
     fontWeight: '500',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   title_container: {
+    marginLeft: 20,
+    color: 'black',
     paddingVertical: 10,
     fontSize: 18,
   },
