@@ -12,6 +12,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     paddingRight: 15,
   },
+  mapContainer: {
+    height: 250,
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
   check: {},
   locationImage: {
     height: 21,
@@ -43,12 +49,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   text: {},
-  profilePicture: {
-    height: 32,
-    width: 32,
-    marginHorizontal: 10,
-    borderRadius: 32,
-  },
   username: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -61,11 +61,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 20,
     marginHorizontal: 10,
-  },
-  owner: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
   },
   profilePicture: {
     height: 48,

@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
   },
   section: {
     flex: 1,
-    marginVertical: 15,
     paddingHorizontal: 30,
   },
   list: {

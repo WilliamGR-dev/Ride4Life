@@ -1,22 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-  TextInput,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {t} from 'react-i18nify';
 
 import styles from './PostRoadTripScreen.styles';
 
 import useController from './PostRoadTripScreen.controller';
-import HeaderBar from '../../others/HeaderBar/HeaderBar';
-import LoadingIndicator from '../../others/LoadingIndicator/LoadingIndicator';
 import SuperFlatList from '../../extends/SuperFlatList/SuperFlatList';
-import RoadsCard from '../../cards/RoadsCard/RoadsCard';
-import LinearGradient from 'react-native-linear-gradient';
 import BackPressButton from '../../buttons/BackPressButton/BackPressButton';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -31,6 +20,249 @@ import {RNCamera} from 'react-native-camera';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FormTextInput from '../../inputs/FormTextInput/FormTextInput';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
+
+const mapStyle = [
+  {
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#ebe3cd',
+      },
+    ],
+  },
+  {
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off',
+      },
+    ],
+  },
+  {
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#523735',
+      },
+    ],
+  },
+  {
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        color: '#f5f1e6',
+      },
+    ],
+  },
+  {
+    featureType: 'administrative',
+    elementType: 'geometry.stroke',
+    stylers: [
+      {
+        color: '#c9b2a6',
+      },
+    ],
+  },
+  {
+    featureType: 'administrative.land_parcel',
+    elementType: 'geometry.stroke',
+    stylers: [
+      {
+        color: '#dcd2be',
+      },
+    ],
+  },
+  {
+    featureType: 'administrative.land_parcel',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#ae9e90',
+      },
+    ],
+  },
+  {
+    featureType: 'administrative.neighborhood',
+    stylers: [
+      {
+        visibility: 'off',
+      },
+    ],
+  },
+  {
+    featureType: 'landscape.man_made',
+    elementType: 'labels.icon',
+    stylers: [
+      {
+        color: '#ffe605',
+      },
+    ],
+  },
+  {
+    featureType: 'landscape.natural',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#dfd2ae',
+      },
+    ],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#dfd2ae',
+      },
+    ],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#93817c',
+      },
+    ],
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'geometry.fill',
+    stylers: [
+      {
+        color: '#a5b076',
+      },
+    ],
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#447530',
+      },
+    ],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#f5f1e6',
+      },
+    ],
+  },
+  {
+    featureType: 'road.arterial',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#fdfcf8',
+      },
+    ],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#f8c967',
+      },
+    ],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry.stroke',
+    stylers: [
+      {
+        color: '#e9bc62',
+      },
+    ],
+  },
+  {
+    featureType: 'road.highway.controlled_access',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#e98d58',
+      },
+    ],
+  },
+  {
+    featureType: 'road.highway.controlled_access',
+    elementType: 'geometry.stroke',
+    stylers: [
+      {
+        color: '#db8555',
+      },
+    ],
+  },
+  {
+    featureType: 'road.local',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#806b63',
+      },
+    ],
+  },
+  {
+    featureType: 'transit.line',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#dfd2ae',
+      },
+    ],
+  },
+  {
+    featureType: 'transit.line',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#8f7d77',
+      },
+    ],
+  },
+  {
+    featureType: 'transit.line',
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        color: '#ebe3cd',
+      },
+    ],
+  },
+  {
+    featureType: 'transit.station',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#dfd2ae',
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    elementType: 'geometry.fill',
+    stylers: [
+      {
+        color: '#b9d3c2',
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#92998d',
+      },
+    ],
+  },
+];
 
 const PostRoadTripScreen = props => {
   const {
@@ -44,7 +276,6 @@ const PostRoadTripScreen = props => {
     isLiked,
     setIsLiked,
     description,
-    setDescription,
     title,
     setTitle,
     roadTrip,
@@ -58,6 +289,9 @@ const PostRoadTripScreen = props => {
     setInputSelected,
     refreshing,
     onRefresh,
+    showMapPreview,
+    initialRegion,
+    waypoint,
   } = useController(props);
 
   const renderImagePicker = () => {
@@ -194,20 +428,18 @@ const PostRoadTripScreen = props => {
       </View>
     </TouchableOpacity>
   ));
-
-  const renderItem = ({item}) => {
-    console.log(roadTrip);
-    if (roadTrip.indexOf(item) === 0) {
+  const renderItem = ({item, index}) => {
+    console.log('InputSelected:', InputSelected);
+    if (index === 0) {
       return (
         <View>
-          {InputSelected === roadTrip.indexOf(item) ||
-          InputSelected === null ? (
+          {!InputSelected || InputSelected === index ? (
             <FormTextInput
-              onFocus={setInputSelected(roadTrip.indexOf(item))}
+              onFocus={() => setInputSelected(index)}
               style={styles.destination}
-              value={roadTrip[roadTrip.indexOf(item)].input}
+              value={roadTrip[index].input}
               onChangeText={value => {
-                setDestination(value, roadTrip.indexOf(item));
+                setDestination(value, index);
                 onChangeDestination(value);
               }}
               placeholder="Depart"
@@ -219,17 +451,18 @@ const PostRoadTripScreen = props => {
             : undefined}
         </View>
       );
-    } else if (roadTrip.indexOf(item) === roadTrip.length - 1) {
+    }
+
+    if (index === roadTrip.length - 1 && InputSelected != 0) {
       return (
         <View>
-          {InputSelected === roadTrip.indexOf(item) ||
-          InputSelected === null ? (
+          {!InputSelected || InputSelected === index ? (
             <FormTextInput
-              onFocus={setInputSelected(roadTrip.indexOf(item))}
+              onFocus={() => setInputSelected(roadTrip.indexOf(item))}
               style={styles.destination}
-              value={roadTrip[roadTrip.indexOf(item)].input}
+              value={roadTrip[index].input}
               onChangeText={value => {
-                setDestination(value, roadTrip.indexOf(item));
+                setDestination(value, index);
                 onChangeDestination(value);
               }}
               placeholder="Arrivée"
@@ -242,17 +475,17 @@ const PostRoadTripScreen = props => {
             : undefined}
         </View>
       );
-    } else {
+    }
+    if (index !== roadTrip.length - 1 && InputSelected != 0) {
       return (
         <View>
-          {InputSelected === roadTrip.indexOf(item) ||
-          InputSelected === null ? (
+          {!InputSelected || InputSelected === index ? (
             <FormTextInput
-              onFocus={setInputSelected(roadTrip.indexOf(item))}
+              onFocus={() => setInputSelected(index)}
               style={styles.destination}
-              value={roadTrip[roadTrip.indexOf(item)].input}
+              value={roadTrip[index].input}
               onChangeText={value => {
-                setDestination(value, roadTrip.indexOf(item));
+                setDestination(value, index);
                 onChangeDestination(value);
               }}
               placeholder="Votre Etape"
@@ -320,6 +553,33 @@ const PostRoadTripScreen = props => {
             onRefresh={onRefresh}
           />
         </View>
+
+        {showMapPreview && (
+          <View style={styles.mapContainer}>
+            <MapView
+              provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+              style={styles.map}
+              region={{
+                latitude: initialRegion.lat,
+                longitude: initialRegion.lng,
+                latitudeDelta: initialRegion.latD + initialRegion.latD * 0.2,
+                longitudeDelta: initialRegion.lngD + initialRegion.lngD * 0.2,
+              }}
+              customMapStyle={mapStyle}
+              showsUserLocation={true}>
+              <MapViewDirections
+                origin={'place_id:' + roadTrip[0].placeId.place_id}
+                destination={
+                  'place_id:' + roadTrip[roadTrip.length - 1].placeId.place_id
+                }
+                waypoints={waypoint}
+                apikey={'AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk'}
+                strokeWidth={3}
+                strokeColor="hotpink"
+              />
+            </MapView>
+          </View>
+        )}
       </View>
     </View>
   );
