@@ -26,7 +26,7 @@ const CommentsCard = props => {
         />
         <View style={styles.container}>
           <Text style={styles.username}>Spartan_25</Text>
-          <Text style={styles.text}>
+          <Text style={styles.cardText}>
             Integer vitae nunc nisi. Vivamus sollicitudin nisl eu elit
             tristique, id ullamcorper nibh faucibus. Integer egestas in turpis
             at pellentesque. In nec elementum magna, quis rutrum tellus.

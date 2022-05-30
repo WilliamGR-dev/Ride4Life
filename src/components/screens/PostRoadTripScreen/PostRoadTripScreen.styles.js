@@ -1,16 +1,20 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  screen: {flex: 1},
+  screen: {flex: 1, backgroundColor: '#27313d'},
   section: {flex: 1},
   send_message: {flexDirection: 'row', alignItems: 'center'},
   postHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderBottomColor: 'rgba(0,0,0,0.10)',
+    borderBottomColor: 'rgba(253,253,253,0.1)',
     borderBottomWidth: 2,
     paddingRight: 15,
+  },
+  postBody: {
+    paddingHorizontal: 40,
+    paddingVertical: 10,
   },
   mapContainer: {
     height: 250,
@@ -44,9 +48,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   container: {marginHorizontal: 15},
+  labelContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
   title: {
+    marginTop: 20,
     fontSize: 18,
     fontWeight: '600',
+    color: '#ffffff',
+  },
+  addStepIcon: {
+    marginLeft: 20,
   },
   text: {},
   username: {

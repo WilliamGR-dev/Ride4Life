@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 40,
   },
+  logo: {
+    textAlign: 'center',
+    fontSize: 48,
+    fontWeight: '500',
+    color: '#000000',
+    marginTop: 50,
+  },
   sectionText: {
     fontSize: 20,
     fontWeight: '500',

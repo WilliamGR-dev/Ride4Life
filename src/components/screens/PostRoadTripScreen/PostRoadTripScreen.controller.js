@@ -16,6 +16,7 @@ const useController = ({}) => {
   const [predictions, setPredictions] = useState([]);
   const [InputSelected, setInputSelected] = useState();
   const [showMapPreview, setShowMapPreview] = useState(false);
+  const [markerCoordinates, setMarkerCoordinates] = useState([]);
   const [initialRegion, setInitialRegion] = useState({
     lat: '',
     lng: '',
@@ -95,6 +96,8 @@ const useController = ({}) => {
       let array = roadTrip;
       array[InputSelected].placeId = value;
       array[InputSelected].input = value.description;
+      let jsonO = null;
+      let jsonD = null;
       if (array[0].placeId != '' && array[array.length - 1].placeId != '') {
         const apiUrlOrigin = `https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk&place_id=${array[0].placeId.place_id}&fields=geometry`;
         const apiUrlDestination = `https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk&place_id=${
@@ -104,7 +107,9 @@ const useController = ({}) => {
           const resultOrigin = await fetch(apiUrlOrigin);
           const resultDestination = await fetch(apiUrlDestination);
           const jsonOrigin = await resultOrigin.json();
+          jsonO = jsonOrigin;
           const jsonDestination = await resultDestination.json();
+          jsonD = jsonDestination;
           setShowMapPreview(false);
           let region = initialRegion;
           if (
@@ -148,7 +153,12 @@ const useController = ({}) => {
       }
       let allWaypoint = array.slice(1, -1);
       let waypointCoordinates = [];
+      let markers = [];
       setWaypoint(undefined);
+      markers.push({
+        latitude: jsonO.result.geometry.location.lat,
+        longitude: jsonO.result.geometry.location.lng,
+      });
       for (const element of allWaypoint) {
         const apiUrlWaypoint = `https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk&place_id=${element.placeId.place_id}&fields=geometry`;
 
@@ -158,7 +168,16 @@ const useController = ({}) => {
           latitude: jsonWaypoint.result.geometry.location.lat,
           longitude: jsonWaypoint.result.geometry.location.lng,
         });
+        markers.push({
+          latitude: jsonWaypoint.result.geometry.location.lat,
+          longitude: jsonWaypoint.result.geometry.location.lng,
+        });
       }
+      markers.push({
+        latitude: jsonD.result.geometry.location.lat,
+        longitude: jsonD.result.geometry.location.lng,
+      });
+      setMarkerCoordinates(markers);
       console.log(waypointCoordinates);
       setWaypoint(waypointCoordinates);
       setRoadTrip(array);
@@ -202,6 +221,7 @@ const useController = ({}) => {
     showMapPreview,
     waypoint,
     initialRegion,
+    markerCoordinates,
   };
 };
 

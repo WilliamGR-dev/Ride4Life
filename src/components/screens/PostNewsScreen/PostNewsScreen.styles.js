@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  screen: {flex: 1},
+  screen: {flex: 1, backgroundColor: '#27313d'},
   section: {flex: 1},
   send_message: {flexDirection: 'row', alignItems: 'center'},
   postHeader: {
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   container: {marginHorizontal: 15},
   title: {
+    color: '#ffffff',
     fontSize: 18,
     fontWeight: '600',
   },

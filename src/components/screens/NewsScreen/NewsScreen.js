@@ -12,8 +12,11 @@ import {t} from 'react-i18nify';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {RNCamera} from 'react-native-camera';
 import {useNavigator} from '../../../hooks';
+import {useSelector} from 'react-redux';
+import FallingModal from '../../modals/FallingModal/FallingModal';
 
 const NewsScreen = props => {
+  const isFalling = useSelector(s => s.isFalling);
   const {goToPostNews} = useNavigator();
 
   const {data, refreshing, onRefresh} = useController(props);
@@ -28,6 +31,7 @@ const NewsScreen = props => {
 
   return (
     <View style={styles.screen}>
+      {isFalling.status && <FallingModal />}
       <View style={styles.section}>
         <SuperFlatList
           data={data}
@@ -39,7 +43,7 @@ const NewsScreen = props => {
         />
       </View>
       <TouchableOpacity style={styles.buttonAdd} onPress={goToPostNews}>
-        <FontAwesome name={'plus'} size={16} />
+        <FontAwesome name={'plus'} size={26} />
       </TouchableOpacity>
     </View>
   );

@@ -59,6 +59,13 @@ const reducersDefinition = [
       bills: null,
     },
   },
+  {
+    type: 'isFalling',
+    isPersistent: false,
+    initialState: {
+      status: false,
+    },
+  },
 ];
 
 export default reducersDefinition;

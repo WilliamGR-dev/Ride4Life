@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const avatarWidth = 150;
 
 const styles = StyleSheet.create({
-  screen: {flex: 1, height: '100%', backgroundColor: '#ffffffff'},
+  screen: {flex: 1, height: '100%', backgroundColor: '#27313d'},
   section: {flex: 1},
   send_message: {flexDirection: 'row', alignItems: 'center'},
   postHeader: {
@@ -13,17 +13,12 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0,0,0,0.10)',
     borderBottomWidth: 2,
     paddingRight: 15,
+    backgroundColor: '#1d2635',
   },
   check: {},
-  owner: {
-    marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    width: '80%',
-    marginHorizontal: 20,
-  },
   container: {marginHorizontal: 15},
   title: {
+    color: '#ffffff',
     fontSize: 18,
     fontWeight: '600',
   },
@@ -32,21 +27,17 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   text: {},
-  profilePicture: {
-    height: 32,
-    width: 32,
-    marginHorizontal: 10,
-    borderRadius: 32,
-  },
   username: {
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 10,
+    color: '#ffffff',
   },
 
-  card: {
-    backgroundColor: '#FFFFFF',
+  proofActionContainer: {
+    marginHorizontal: 20,
   },
+  card: {},
   owner: {
     marginVertical: 20,
     justifyContent: 'flex-start',

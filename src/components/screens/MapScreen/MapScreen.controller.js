@@ -13,7 +13,6 @@ import {
   setUpdateIntervalForType,
 } from 'react-native-sensors';
 import {PERMISSIONS} from 'react-native-permissions';
-let fallingDate = null;
 const useController = ({}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPermissionAuthorized, setIsPermissionAuthorized] = useState(false);
@@ -21,6 +20,7 @@ const useController = ({}) => {
   const [currentPosition, setCurrentPosition] = useState();
   const [destination, setDestination] = useState();
   const [destinationPlaceId, setDestinationPlaceId] = useState(null);
+  const [destinationCoordinate, setDestinationCoordinate] = useState(null);
   const [predictions, setPredictions] = useState([]);
   const userProfile = useSelector(s => s.userProfile);
 
@@ -72,25 +72,6 @@ const useController = ({}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const checkIfFall = useCallback(async () => {
-    setUpdateIntervalForType(SensorTypes.accelerometer, 100);
-    const sub = accelerometer.subscribe(({x, y, z}) => {
-      let isFalling = Math.abs(x) < 1 && Math.abs(y) < 1 && Math.abs(z) < 1;
-      if (isFalling && !fallingDate) {
-        fallingDate = new Date();
-      } else if (!isFalling && fallingDate) {
-        fallingDate = null;
-      } else if (isFalling && fallingDate) {
-        let currentDate = new Date();
-        if (currentDate - fallingDate >= 300) {
-          fallingDate = null;
-          alert('Chute');
-        }
-      }
-    });
-    return sub;
-  }, []);
-
   const onChangeDestination = useCallback(async destination => {
     const apiUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk
     &input=${destination}&radius=2000`;
@@ -103,6 +84,16 @@ const useController = ({}) => {
     } catch (err) {
       console.error(err);
     }
+  }, []);
+
+  const getCoordinates = useCallback(async place_id => {
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk&place_id=${place_id}&fields=geometry`;
+    const result = await fetch(apiUrl);
+    const json = await result.json();
+    setDestinationCoordinate({
+      latitude: json.result.geometry.location.lat,
+      longitude: json.result.geometry.location.lng,
+    });
   }, []);
 
   return {
@@ -121,6 +112,8 @@ const useController = ({}) => {
     setDestinationPlaceId,
     isSearching,
     setSearching,
+    destinationCoordinate,
+    getCoordinates,
   };
 };
 

@@ -15,6 +15,9 @@ import {useNavigator} from '../../../hooks';
 import useController from './MapScreen.controller';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FallingModal from '../../modals/FallingModal/FallingModal';
+import {useSelector} from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,14 +34,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     padding: 5,
     zIndex: 4,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#27313d',
     height: '100%',
     width: '100%',
   },
   searchHeader: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   destination: {
+    marginLeft: 10,
     width: '80%',
     marginBottom: '8%',
     height: '10%',
@@ -46,9 +51,11 @@ const styles = StyleSheet.create({
   suggestionsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 5,
   },
   suggestions: {
-    backgroundColor: 'white',
+    backgroundColor: '#27313d',
+    color: '#ffffff',
     padding: 5,
     fontSize: 18,
     marginLeft: 5,
@@ -68,8 +75,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 32,
     padding: 10,
-    height: 64,
-    width: 64,
+    height: 48,
+    width: 48,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -77,43 +84,44 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 32,
     padding: 10,
-    height: 64,
-    width: 64,
+    height: 48,
+    width: 48,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  speedText: {
+    fontSize: 10,
   },
 });
 
 const mapStyle = [
   {
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#ebe3cd',
-      },
-    ],
-  },
-  {
-    elementType: 'labels',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
+    featureType: 'all',
     elementType: 'labels.text.fill',
     stylers: [
       {
-        color: '#523735',
+        color: '#ffffff',
       },
     ],
   },
   {
+    featureType: 'all',
     elementType: 'labels.text.stroke',
     stylers: [
       {
-        color: '#f5f1e6',
+        color: '#000000',
+      },
+      {
+        lightness: 13,
+      },
+    ],
+  },
+  {
+    featureType: 'administrative',
+    elementType: 'geometry.fill',
+    stylers: [
+      {
+        color: '#000000',
       },
     ],
   },
@@ -122,30 +130,19 @@ const mapStyle = [
     elementType: 'geometry.stroke',
     stylers: [
       {
-        color: '#c9b2a6',
+        color: '#144b53',
       },
-    ],
-  },
-  {
-    featureType: 'administrative.land_parcel',
-    elementType: 'geometry.stroke',
-    stylers: [
       {
-        color: '#dcd2be',
+        lightness: 14,
       },
-    ],
-  },
-  {
-    featureType: 'administrative.land_parcel',
-    elementType: 'labels.text.fill',
-    stylers: [
       {
-        color: '#ae9e90',
+        weight: 1.4,
       },
     ],
   },
   {
-    featureType: 'administrative.neighborhood',
+    featureType: 'administrative.locality',
+    elementType: 'geometry',
     stylers: [
       {
         visibility: 'off',
@@ -153,173 +150,131 @@ const mapStyle = [
     ],
   },
   {
-    featureType: 'landscape.man_made',
-    elementType: 'labels.icon',
+    featureType: 'administrative.locality',
+    elementType: 'labels',
     stylers: [
       {
-        color: '#ffe605',
+        visibility: 'on',
       },
     ],
   },
   {
-    featureType: 'landscape.natural',
-    elementType: 'geometry',
+    featureType: 'landscape',
+    elementType: 'all',
     stylers: [
       {
-        color: '#dfd2ae',
-      },
-    ],
-  },
-  {
-    featureType: 'poi',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#dfd2ae',
+        color: '#08304b',
       },
     ],
   },
   {
     featureType: 'poi',
-    elementType: 'labels.text.fill',
+    elementType: 'geometry',
     stylers: [
       {
-        color: '#93817c',
+        lightness: 5,
+      },
+      {
+        color: '#ff0000',
+      },
+      {
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: 'poi.park',
+    featureType: 'poi',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off',
+      },
+    ],
+  },
+  {
+    featureType: 'poi.attraction',
+    elementType: 'geometry',
+    stylers: [
+      {
+        visibility: 'off',
+      },
+    ],
+  },
+  {
+    featureType: 'poi.attraction',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off',
+      },
+    ],
+  },
+  {
+    featureType: 'road.highway',
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#a5b076',
+        color: '#000000',
       },
     ],
   },
   {
-    featureType: 'poi.park',
-    elementType: 'labels.text.fill',
+    featureType: 'road.highway',
+    elementType: 'geometry.stroke',
     stylers: [
       {
-        color: '#447530',
+        color: '#0b434f',
       },
-    ],
-  },
-  {
-    featureType: 'road',
-    elementType: 'geometry',
-    stylers: [
       {
-        color: '#f5f1e6',
+        lightness: 25,
       },
     ],
   },
   {
     featureType: 'road.arterial',
-    elementType: 'geometry',
+    elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#fdfcf8',
+        color: '#000000',
       },
     ],
   },
   {
-    featureType: 'road.highway',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#f8c967',
-      },
-    ],
-  },
-  {
-    featureType: 'road.highway',
+    featureType: 'road.arterial',
     elementType: 'geometry.stroke',
     stylers: [
       {
-        color: '#e9bc62',
+        color: '#0b3d51',
       },
-    ],
-  },
-  {
-    featureType: 'road.highway.controlled_access',
-    elementType: 'geometry',
-    stylers: [
       {
-        color: '#e98d58',
-      },
-    ],
-  },
-  {
-    featureType: 'road.highway.controlled_access',
-    elementType: 'geometry.stroke',
-    stylers: [
-      {
-        color: '#db8555',
+        lightness: 16,
       },
     ],
   },
   {
     featureType: 'road.local',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#806b63',
-      },
-    ],
-  },
-  {
-    featureType: 'transit.line',
     elementType: 'geometry',
     stylers: [
       {
-        color: '#dfd2ae',
+        color: '#000000',
       },
     ],
   },
   {
-    featureType: 'transit.line',
-    elementType: 'labels.text.fill',
+    featureType: 'transit',
+    elementType: 'all',
     stylers: [
       {
-        color: '#8f7d77',
-      },
-    ],
-  },
-  {
-    featureType: 'transit.line',
-    elementType: 'labels.text.stroke',
-    stylers: [
-      {
-        color: '#ebe3cd',
-      },
-    ],
-  },
-  {
-    featureType: 'transit.station',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#dfd2ae',
+        color: '#146474',
       },
     ],
   },
   {
     featureType: 'water',
-    elementType: 'geometry.fill',
+    elementType: 'all',
     stylers: [
       {
-        color: '#b9d3c2',
-      },
-    ],
-  },
-  {
-    featureType: 'water',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#92998d',
+        color: '#021019',
       },
     ],
   },
@@ -338,24 +293,27 @@ const MapScreen = props => {
     setDestinationPlaceId,
     isSearching,
     setSearching,
+    destinationCoordinate,
+    getCoordinates,
   } = useController(props);
 
   const {} = useNavigator();
 
+  const isFalling = useSelector(s => s.isFalling);
+
   const predictionsView = predictions.map(prediction => (
     <TouchableOpacity
       onPress={() => {
+        console.log(prediction);
         setDestinationPlaceId(prediction.place_id);
         setDestination(prediction.description);
+        getCoordinates(prediction.place_id);
         setPredictions([]);
         setSearching(false);
       }}
       key={prediction.place_id}>
       <View style={styles.suggestionsContainer}>
-        <Image
-          style={styles.locationImage}
-          source={require('../../../assets/images/icons/location-dot-solid.png')}
-        />
+        <Ionicons name={'location-sharp'} color={'#ffffff'} size={32} />
         <Text style={styles.suggestions}>
           {prediction.structured_formatting.main_text}
           {prediction.structured_formatting.secondary_text}
@@ -366,6 +324,7 @@ const MapScreen = props => {
 
   return (
     <View style={styles.container}>
+      {isFalling.status && <FallingModal />}
       {isSearching && (
         <View style={styles.placeview}>
           <View style={styles.searchHeader}>
@@ -373,7 +332,7 @@ const MapScreen = props => {
               onPress={() => {
                 setSearching(false);
               }}>
-              <MaterialIcons name={'arrow-back'} size={40} />
+              <MaterialIcons name={'arrow-back'} size={40} color={'#ffffff'} />
             </TouchableOpacity>
             <FormTextInput
               style={styles.destination}
@@ -410,9 +369,12 @@ const MapScreen = props => {
                 }
                 destination={'place_id:' + destinationPlaceId}
                 apikey={'AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk'}
-                strokeWidth={3}
-                strokeColor="hotpink"
+                strokeWidth={10}
+                strokeColor="#45a5f7"
               />
+            )}
+            {destinationCoordinate && (
+              <Marker coordinate={destinationCoordinate} />
             )}
           </MapView>
           <View style={styles.informationContainer}>
@@ -421,12 +383,14 @@ const MapScreen = props => {
                 onPress={() => {
                   setSearching(true);
                 }}>
-                <FontAwesome size={32} name={'search'} />
+                <FontAwesome size={24} name={'search'} />
               </TouchableOpacity>
             </View>
             <View style={styles.speedContainer}>
-              <Text>{Math.round(currentPosition.coords.speed) * 3.6}</Text>
-              <Text>Km/h</Text>
+              <Text style={styles.speedText}>
+                {Math.round(currentPosition.coords.speed) * 3.6}
+              </Text>
+              <Text style={styles.speedText}>Km/h</Text>
             </View>
           </View>
         </>

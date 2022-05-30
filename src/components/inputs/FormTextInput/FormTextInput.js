@@ -1,13 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import {DefaultTheme, TextInput} from 'react-native-paper';
 
 import styles from './FormTextInput.styles';
 
 const theme = {
-  colors: {
-    primary: '#757575',
-  },
   dark: false,
 };
 
@@ -16,10 +13,12 @@ const FormTextInput = props => {
     <View style={props.style}>
       <TextInput
         ref={props.inputRef}
-        mode="outlined"
+        mode="flat"
         returnKeyType={'done'}
-        underlineColor={'transparent'}
-        placeholderTextColor={props.error ? 'red' : '#707070'}
+        underlineColor={'#ffffff'}
+        activeUnderlineColor={'#2282e6'}
+        selectionColor={'#2282e6'}
+        placeholderTextColor={props.error ? 'red' : '#ffffff'}
         dense
         theme={theme}
         {...props}

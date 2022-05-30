@@ -20,7 +20,8 @@ const TabNavigator = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-      }}>
+      }}
+      sceneContainerStyle={{backgroundColor: '#27313d'}}>
       <Tab.Screen
         name="Map"
         component={MapScreen}

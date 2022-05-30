@@ -7,13 +7,22 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     bottom: 1,
+    backgroundColor: '#27313d',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  name: {
+    color: '#ffffff',
+    fontSize: 22,
   },
   profile: {
-    padding: 40,
+    padding: 10,
+    flexDirection: 'row',
     alignItems: 'center',
   },
   container_picture: {
-    marginBottom: 20,
     justifyItems: 'center',
     alignItems: 'center',
     width: 128,
@@ -27,7 +36,10 @@ const styles = StyleSheet.create({
     borderRadius: 80,
     padding: 20,
   },
-  name: {
+  stat: {
+    marginHorizontal: 10,
+  },
+  stat_text: {
     textAlign: 'center',
     marginBottom: 5,
     color: '#ffffff',
@@ -38,8 +50,22 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   account_container: {
-    borderColor: 'rgba(83,83,83,0.4)',
-    paddingHorizontal: 20,
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  news: {
+    marginTop: 40,
+    width: '32.5%',
+    height: '32.5%',
+    margin: 1,
+  },
+  news_image: {
+    width: '100%',
+    height: '100%',
   },
   button_container: {
     paddingVertical: 10,

@@ -3,12 +3,13 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#ffffff'
+    alignItems: 'center',
+    backgroundColor: '#1d2635',
+    paddingTop: 15,
   },
   btn: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 10,
   },
   btnImage: {
     height: 26,

@@ -23,9 +23,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 import Feather from 'react-native-vector-icons/Feather';
 import SubmitButton from '../../buttons/SubmitButton/SubmitButton';
+import {useSelector} from 'react-redux';
+import FallingModal from '../../modals/FallingModal/FallingModal';
 
 const RoadScreen = props => {
   const {data, refreshing, onRefresh} = useController(props);
+  const isFalling = useSelector(s => s.isFalling);
 
   if (!data) {
     return <LoadingIndicator full />;
@@ -37,6 +40,7 @@ const RoadScreen = props => {
 
   return (
     <View style={styles.screen}>
+      {isFalling.status && <FallingModal />}
       <ImageBackground
         style={styles.cardBackGround}
         resizeMode="cover"

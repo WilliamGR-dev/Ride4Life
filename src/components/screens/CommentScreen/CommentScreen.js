@@ -26,10 +26,13 @@ import Feather from 'react-native-vector-icons/Feather';
 import SubmitButton from '../../buttons/SubmitButton/SubmitButton';
 import NewsCard from '../../cards/NewsCard/NewsCard';
 import CommentsCard from '../../cards/CommentsCard/CommentsCard';
+import FallingModal from '../../modals/FallingModal/FallingModal';
+import {useSelector} from 'react-redux';
 
 const CommentScreen = props => {
   const {data, refreshing, onRefresh} = useController(props);
 
+  const isFalling = useSelector(s => s.isFalling);
   if (!data) {
     return <LoadingIndicator full />;
   }
@@ -40,8 +43,9 @@ const CommentScreen = props => {
 
   return (
     <View style={styles.screen}>
+      {isFalling.status && <FallingModal />}
       <View style={styles.commentHeader}>
-        <BackPressButton />
+        <BackPressButton color={'#ffffff'} />
         <Text style={styles.title}>Commentaires</Text>
       </View>
       <View style={styles.section}>
@@ -61,7 +65,10 @@ const CommentScreen = props => {
             uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
           }}
         />
-        <TextInput placeholder={'Ecrivez un message...'} />
+        <TextInput
+          placeholderTextColor={'#929292'}
+          placeholder={'Ecrivez un message...'}
+        />
       </View>
     </View>
   );

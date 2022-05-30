@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import {t} from 'react-i18nify';
 
 import styles from './PostRoadTripScreen.styles';
@@ -20,8 +27,10 @@ import {RNCamera} from 'react-native-camera';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FormTextInput from '../../inputs/FormTextInput/FormTextInput';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
+import {useSelector} from 'react-redux';
+import FallingModal from '../../modals/FallingModal/FallingModal';
 
 const mapStyle = [
   {
@@ -292,7 +301,10 @@ const PostRoadTripScreen = props => {
     showMapPreview,
     initialRegion,
     waypoint,
+    markerCoordinates,
   } = useController(props);
+
+  const isFalling = useSelector(s => s.isFalling);
 
   const renderImagePicker = () => {
     if (picture) {
@@ -503,84 +515,97 @@ const PostRoadTripScreen = props => {
 
   return (
     <View style={styles.screen}>
+      {isFalling.status && <FallingModal />}
       <View style={styles.postHeader}>
-        <BackPressButton />
+        <BackPressButton color={'#ffffff'} />
         <Text style={styles.title}>Nouveau RoadTrip</Text>
         <TouchableOpacity style={styles.check}>
-          <Feather name={'check'} size={32} />
+          <Feather name={'check'} size={32} color={'#ffffff'} />
         </TouchableOpacity>
       </View>
       {/*{renderImagePicker()}*/}
-      <FormTextInput
-        style={styles.destination}
-        value={title}
-        onChangeText={value => {
-          setTitle(value);
-        }}
-        placeholder="Votre titre"
-        label="Titre"
-      />
-      <FormTextInput
-        style={styles.destination}
-        value={title}
-        onChangeText={value => {
-          setTitle(value);
-        }}
-        placeholder="Votre description"
-        label="Description"
-      />
-      <FormTextInput
-        style={styles.destination}
-        value={title}
-        onChangeText={value => {
-          setTitle(value);
-        }}
-        placeholder="Votre petite description"
-        label="Petite description"
-      />
-      <View>
-        <Text>Itineraires</Text>
-        <TouchableOpacity onPress={createStep}>
-          <FontAwesome name={'plus'} size={20} />
-        </TouchableOpacity>
+      <ScrollView style={styles.postBody}>
+        <FormTextInput
+          style={styles.destination}
+          value={title}
+          onChangeText={value => {
+            setTitle(value);
+          }}
+          placeholder="Votre titre"
+          label="Titre"
+        />
+        <FormTextInput
+          style={styles.destination}
+          value={title}
+          onChangeText={value => {
+            setTitle(value);
+          }}
+          placeholder="Votre description"
+          label="Description"
+        />
+        <FormTextInput
+          style={styles.destination}
+          value={title}
+          onChangeText={value => {
+            setTitle(value);
+          }}
+          placeholder="Votre petite description"
+          label="Petite description"
+        />
         <View>
-          <SuperFlatList
-            data={roadTrip}
-            keyExtractor={item => roadTrip.indexOf(item)}
-            renderItem={renderItem}
-            style={styles.list}
-            isRefreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        </View>
-
-        {showMapPreview && (
-          <View style={styles.mapContainer}>
-            <MapView
-              provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-              style={styles.map}
-              region={{
-                latitude: initialRegion.lat,
-                longitude: initialRegion.lng,
-                latitudeDelta: initialRegion.latD + initialRegion.latD * 0.2,
-                longitudeDelta: initialRegion.lngD + initialRegion.lngD * 0.2,
-              }}
-              customMapStyle={mapStyle}
-              showsUserLocation={true}>
-              <MapViewDirections
-                origin={'place_id:' + roadTrip[0].placeId.place_id}
-                destination={
-                  'place_id:' + roadTrip[roadTrip.length - 1].placeId.place_id
-                }
-                waypoints={waypoint}
-                apikey={'AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk'}
-                strokeWidth={3}
-                strokeColor="hotpink"
+          <View style={styles.labelContainer}>
+            <Text style={styles.title}>Itineraires</Text>
+            <TouchableOpacity onPress={createStep}>
+              <FontAwesome
+                name={'plus'}
+                size={20}
+                color={'#ffffff'}
+                style={styles.addStepIcon}
               />
-            </MapView>
+            </TouchableOpacity>
           </View>
-        )}
-      </View>
+          <View>
+            <SuperFlatList
+              data={roadTrip}
+              keyExtractor={item => roadTrip.indexOf(item)}
+              renderItem={renderItem}
+              style={styles.list}
+              isRefreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          </View>
+
+          {showMapPreview && (
+            <View style={styles.mapContainer}>
+              <MapView
+                provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                style={styles.map}
+                region={{
+                  latitude: initialRegion.lat,
+                  longitude: initialRegion.lng,
+                  latitudeDelta: initialRegion.latD + initialRegion.latD * 0.2,
+                  longitudeDelta: initialRegion.lngD + initialRegion.lngD * 0.2,
+                }}
+                customMapStyle={mapStyle}
+                showsUserLocation={true}>
+                <MapViewDirections
+                  origin={'place_id:' + roadTrip[0].placeId.place_id}
+                  destination={
+                    'place_id:' + roadTrip[roadTrip.length - 1].placeId.place_id
+                  }
+                  waypoints={waypoint}
+                  apikey={'AIzaSyCvTx4sUz4AYNZFfYfoaanpdKZ3DbvWeWk'}
+                  strokeWidth={10}
+                  strokeColor="#45a5f7"
+                />
+                {markerCoordinates.map((marker, index) => (
+                  <Marker key={index} coordinate={marker} />
+                ))}
+              </MapView>
+            </View>
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 };

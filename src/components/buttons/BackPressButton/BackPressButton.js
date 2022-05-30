@@ -11,7 +11,7 @@ const BackPressButton = props => {
 
   return (
     <HitSlopTouchableOpacity onPress={goBack} style={styles.container}>
-      <MaterialIcons name={'arrow-back-ios'} size={40} color={props.color} />
+      <MaterialIcons name={'arrow-back-ios'} size={32} color={props.color} />
     </HitSlopTouchableOpacity>
   );
 };

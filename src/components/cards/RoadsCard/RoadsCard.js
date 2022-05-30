@@ -25,34 +25,31 @@ const RoadsCard = props => {
   const {goToRoadTrip} = useNavigator();
 
   return (
-    <ImageBackground
-      style={styles.cardBackGround}
-      resizeMode="cover"
-      source={image}>
-      <LinearGradient
-        start={{x: 0, y: 0}}
-        end={{x: 0, y: 1}}
-        colors={['rgba(255,255,255,0.1)', '#000000']}
-        style={styles.linearGradient}>
-        <Text style={styles.cardTitle}>{props.news.title}</Text>
-        <Text style={styles.cardSubtitle}>{props.news.subtitle}</Text>
-        <View style={styles.roadInformation}>
-          <Text style={styles.cardDistance}>
-            <MaterialCommunityIcons name={'map-marker-distance'} size={20} />{' '}
-            {props.news.distance} km
-          </Text>
-          <Text style={styles.cardDistance}>
-            <Ionicons name={'location-outline'} size={20} /> {props.news.city}
-          </Text>
-          <TouchableOpacity onPress={goToRoadTrip}>
-            <Image
-              style={styles.moreInformation}
-              source={require('../../../assets/images/icons/right-arrow.png')}
-            />
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
-    </ImageBackground>
+    <TouchableOpacity onPress={goToRoadTrip}>
+      <ImageBackground
+        style={styles.cardBackGround}
+        resizeMode="cover"
+        source={image}
+        imageStyle={styles.cardBackGround}>
+        <LinearGradient
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
+          colors={['rgba(255,255,255,0.1)', '#000000']}
+          style={styles.linearGradient}>
+          <Text style={styles.cardTitle}>{props.news.title}</Text>
+          <Text style={styles.cardSubtitle}>{props.news.subtitle}</Text>
+          <View style={styles.roadInformation}>
+            <Text style={styles.cardDistance}>
+              <MaterialCommunityIcons name={'map-marker-distance'} size={20} />{' '}
+              {props.news.distance} km
+            </Text>
+            <Text style={styles.cardDistance}>
+              <Ionicons name={'location-outline'} size={20} /> {props.news.city}
+            </Text>
+          </View>
+        </LinearGradient>
+      </ImageBackground>
+    </TouchableOpacity>
   );
 };
 

@@ -30,6 +30,8 @@ import HitSlopTouchableOpacity from '../../extends/HitSlopTouchableOpacity/HitSl
 import {RNCamera} from 'react-native-camera';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FallingModal from '../../modals/FallingModal/FallingModal';
+import {useSelector} from 'react-redux';
 
 const PostNewsScreen = props => {
   const {
@@ -45,6 +47,8 @@ const PostNewsScreen = props => {
     description,
     setDescription,
   } = useController(props);
+
+  const isFalling = useSelector(s => s.isFalling);
 
   const renderImagePicker = () => {
     if (picture) {
@@ -162,11 +166,12 @@ const PostNewsScreen = props => {
 
   return (
     <View style={styles.screen}>
+      {isFalling.status && <FallingModal />}
       <View style={styles.postHeader}>
-        <BackPressButton />
+        <BackPressButton color={'#ffffff'} />
         <Text style={styles.title}>Nouvelle Publication</Text>
         <TouchableOpacity style={styles.check}>
-          <Feather name={'check'} size={32} />
+          <Feather name={'check'} size={32} color={'#ffffff'} />
         </TouchableOpacity>
       </View>
       {renderImagePicker()}

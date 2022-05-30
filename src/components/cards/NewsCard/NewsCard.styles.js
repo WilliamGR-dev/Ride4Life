@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'rgba(255,255,255,0.9)',
     borderRadius: 15,
     marginVertical: 10,
     paddingVertical: 20,
@@ -32,19 +32,29 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
+  likeCountainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   actionUnlike: {
     backgroundColor: '#FC0B7B',
-    padding: 10,
+    padding: 5,
     borderRadius: 32,
   },
   actionLike: {
     backgroundColor: '#f1f1f1',
-    padding: 10,
+    padding: 5,
+    borderRadius: 32,
+  },
+  countLikes: {
+    backgroundColor: 'rgba(241,241,241,0.5)',
+    padding: 5,
+    marginLeft: 5,
     borderRadius: 32,
   },
   actionComment: {
     backgroundColor: '#f1f1f1',
-    padding: 10,
+    padding: 5,
     borderRadius: 32,
   },
   picture: {

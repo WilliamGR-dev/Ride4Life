@@ -15,7 +15,7 @@ const NewsCard = props => {
   const {isMore, setIsMore, numOfLines, onTextLayout, isLiked, setIsLiked} =
     useController(props);
 
-  const {goToComment} = useNavigator();
+  const {goToComment, goToProfileNews} = useNavigator();
 
   return (
     <View style={styles.card}>
@@ -27,7 +27,9 @@ const NewsCard = props => {
           }}
         />
         <View>
-          <Text style={styles.username}>Spartan_25</Text>
+          <TouchableOpacity onPress={goToProfileNews}>
+            <Text style={styles.username}>Spartan_25</Text>
+          </TouchableOpacity>
           <Text style={styles.created_at}>il y a 2 heures</Text>
         </View>
       </View>
@@ -41,22 +43,28 @@ const NewsCard = props => {
 
         <View style={styles.actionCountainer}>
           {isLiked ? (
-            <TouchableOpacity onPress={() => setIsLiked(false)}>
-              <View style={styles.actionUnlike}>
-                <AntDesign size={26} name={'heart'} color={'#ffffff'} />
-              </View>
-            </TouchableOpacity>
+            <View style={styles.likeCountainer}>
+              <TouchableOpacity onPress={() => setIsLiked(false)}>
+                <View style={styles.actionUnlike}>
+                  <AntDesign size={20} name={'hearto'} color={'#ffffff'} />
+                </View>
+              </TouchableOpacity>
+              <Text style={styles.countLikes}>4,558</Text>
+            </View>
           ) : (
-            <TouchableOpacity onPress={() => setIsLiked(true)}>
-              <View style={styles.actionLike}>
-                <AntDesign size={26} name={'heart'} />
-              </View>
-            </TouchableOpacity>
+            <View style={styles.likeCountainer}>
+              <TouchableOpacity onPress={() => setIsLiked(true)}>
+                <View style={styles.actionLike}>
+                  <AntDesign size={20} name={'hearto'} />
+                </View>
+              </TouchableOpacity>
+              <Text style={styles.countLikes}>4,558</Text>
+            </View>
           )}
 
           <TouchableOpacity onPress={goToComment}>
             <View style={styles.actionComment}>
-              <Ionicons size={26} name={'chatbubble-outline'} />
+              <Ionicons size={20} name={'chatbubble-outline'} />
             </View>
           </TouchableOpacity>
         </View>

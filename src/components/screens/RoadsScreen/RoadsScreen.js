@@ -10,10 +10,14 @@ import SuperFlatList from '../../extends/SuperFlatList/SuperFlatList';
 import RoadsCard from '../../cards/RoadsCard/RoadsCard';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigator} from '../../../hooks';
+import HitSlopTouchableOpacity from '../../extends/HitSlopTouchableOpacity/HitSlopTouchableOpacity';
+import FallingModal from '../../modals/FallingModal/FallingModal';
+import {useSelector} from 'react-redux';
 
 const RoadsScreen = props => {
   const {PostRoadTrip} = useNavigator();
   const {data, refreshing, onRefresh} = useController(props);
+  const isFalling = useSelector(s => s.isFalling);
 
   if (!data) {
     return <LoadingIndicator full />;
@@ -25,14 +29,15 @@ const RoadsScreen = props => {
 
   return (
     <View style={styles.screen}>
+      {isFalling.status && <FallingModal />}
       <View style={styles.header}>
-        <TouchableOpacity onPress={PostRoadTrip}>
-          <FontAwesome name={'plus'} size={16} />
-        </TouchableOpacity>
+        <HitSlopTouchableOpacity onPress={PostRoadTrip}>
+          <FontAwesome name={'plus'} size={16} color={'#ffffff'} />
+        </HitSlopTouchableOpacity>
         <Text style={styles.title}>{t('roads_screen.title')}</Text>
-        <TouchableOpacity>
-          <FontAwesome name={'filter'} size={16} />
-        </TouchableOpacity>
+        <HitSlopTouchableOpacity>
+          <FontAwesome name={'filter'} size={16} color={'#ffffff'} />
+        </HitSlopTouchableOpacity>
       </View>
       <View style={styles.section}>
         <SuperFlatList

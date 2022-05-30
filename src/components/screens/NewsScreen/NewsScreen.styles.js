@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   noPermissionContainer: {
     flex: 1,
-    backgroundColor: '#e5e4e5',
+    backgroundColor: '#27313d',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: 32,
-    backgroundColor: 'rgba(215,215,215,1)',
-    padding: 26,
-    borderRadius: 48,
+    backgroundColor: '#5597c7',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 64,
   },
   actionComment: {
     padding: 10,

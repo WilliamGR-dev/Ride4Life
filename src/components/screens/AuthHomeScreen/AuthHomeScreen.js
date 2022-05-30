@@ -17,6 +17,9 @@ const AuthHomeScreen = props => {
   return (
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.screen}>
+        <Text style={styles.logo}>
+          Rider{'\n'}4{'\n'}Life
+        </Text>
         <View style={styles.container}>
           <View style={styles.section}>
             <SubmitButton

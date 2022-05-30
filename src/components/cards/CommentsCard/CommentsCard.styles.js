@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 10,
+    color: '#ffffff',
   },
   actionCountainer: {
     flexDirection: 'row',
@@ -32,6 +33,11 @@ const styles = StyleSheet.create({
     bottom: 40,
     justifyContent: 'space-between',
     width: '100%',
+  },
+  container: {
+    marginHorizontal: 15,
+    marginVertical: 5,
+    flex: 1,
   },
   actionUnlike: {
     backgroundColor: '#FC0B7B',
@@ -55,7 +61,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   cardText: {
-    color: '#565656',
+    flex: 1,
+    color: '#ffffff',
     fontSize: 16,
     marginTop: 5,
     paddingHorizontal: 10,
@@ -67,7 +74,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   created_at: {
-    color: 'rgba(86,86,86,0.2)',
+    color: 'rgba(255,255,255,0.2)',
     fontSize: 12,
     paddingHorizontal: 10,
   },

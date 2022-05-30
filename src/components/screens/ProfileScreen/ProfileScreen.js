@@ -10,14 +10,18 @@ import SubmitButton from '../../buttons/SubmitButton/SubmitButton';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FallingModal from '../../modals/FallingModal/FallingModal';
+import {useSelector} from 'react-redux';
 
 const ProfileScreen = props => {
+  const isFalling = useSelector(s => s.isFalling);
   const {logout} = useController(props);
 
   const {goToUpdateProfile, goToUpdatePassword} = useNavigator();
 
   return (
     <View style={styles.screen}>
+      {isFalling.status && <FallingModal />}
       <View style={styles.profile}>
         <View style={styles.container_picture}>
           <Image
@@ -34,17 +38,17 @@ const ProfileScreen = props => {
         <TouchableOpacity
           style={styles.button_container}
           onPress={goToUpdateProfile}>
-          <Feather size={26} name={'user'} />
+          <Feather size={26} name={'user'} color={'#ffffff'} />
           <Text style={styles.title_container}>Mon profile</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button_container}
           onPress={goToUpdatePassword}>
-          <FontAwesome size={26} name={'cog'} />
+          <FontAwesome size={26} name={'cog'} color={'#ffffff'} />
           <Text style={styles.title_container}>Modifier le mot de passe</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button_container} onPress={logout}>
-          <MaterialIcons size={26} name={'logout'} />
+          <MaterialIcons size={26} name={'logout'} color={'#ffffff'} />
           <Text style={styles.title_container}>Déconnexion</Text>
         </TouchableOpacity>
       </View>

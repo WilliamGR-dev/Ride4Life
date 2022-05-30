@@ -12,9 +12,8 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   title: {
-    color: '#000',
+    color: '#ffffff',
     fontSize: 32,
-    fontWeight: '500',
     textAlign: 'center',
   },
   section: {

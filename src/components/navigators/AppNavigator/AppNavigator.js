@@ -11,6 +11,8 @@ import CommentScreen from '../../screens/CommentScreen/CommentScreen';
 import PostNewsScreen from '../../screens/PostNewsScreen/PostNewsScreen';
 import PostRoadTripScreen from '../../screens/PostRoadTripScreen/PostRoadTripScreen';
 import UpdatePasswordScreen from '../../screens/UpdatePasswordScreen/UpdatePasswordScreen';
+import ProfileNewsScreen from '../../screens/ProfileNewsScreen/ProfileNewsScreen';
+import {Modal, Text} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,13 +24,13 @@ const AppNavigator = props => {
       initialRouteName="TabNavigator"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
-
       <Stack.Screen name="UpdateProfile" component={UpdateProfileScreen} />
       <Stack.Screen name="UpdatePassword" component={UpdatePasswordScreen} />
       <Stack.Screen name="RoadTrip" component={RoadScreen} />
       <Stack.Screen name="Comment" component={CommentScreen} />
       <Stack.Screen name="PostNews" component={PostNewsScreen} />
       <Stack.Screen name="PostRoadTrip" component={PostRoadTripScreen} />
+      <Stack.Screen name="ProfileNews" component={ProfileNewsScreen} />
     </Stack.Navigator>
   );
 };

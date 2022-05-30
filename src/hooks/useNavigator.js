@@ -53,6 +53,10 @@ const useNavigator = () => {
     navigation.navigate('ChatHome', {});
   }, [navigation]);
 
+  const goToProfileNews = useCallback(() => {
+    navigation.navigate('ProfileNews', {});
+  }, [navigation]);
+
   const goToChatMessages = useCallback(
     chatId => {
       navigation.navigate('ChatMessages', {chatId: Number(chatId)});
@@ -153,6 +157,7 @@ const useNavigator = () => {
     goToRoadTrip,
     goToComment,
     goToPostNews,
+    goToProfileNews,
     PostRoadTrip,
     goToAuthRegister,
     goToSidepForm,

@@ -64,9 +64,7 @@ const BottomTabBar = ({state, descriptors, navigation}) => {
   };
 
   return (
-    <View
-      colors={['#1DB4C4', '#ECE423']}
-      style={{...styles.container, height: tabBarHeight}}>
+    <View style={{...styles.container, height: tabBarHeight}}>
       {state.routes.map(renderItem)}
     </View>
   );

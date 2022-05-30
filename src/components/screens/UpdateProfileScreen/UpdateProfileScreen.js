@@ -10,6 +10,8 @@ import Feather from 'react-native-vector-icons/Feather';
 import SubmitButton from '../../buttons/SubmitButton/SubmitButton';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FormTextInput from '../../inputs/FormTextInput/FormTextInput';
+import FallingModal from '../../modals/FallingModal/FallingModal';
+import {useSelector} from 'react-redux';
 
 const UpdateProfileScreen = props => {
   const {
@@ -25,6 +27,8 @@ const UpdateProfileScreen = props => {
     email,
     setEmail,
   } = useController(props);
+
+  const isFalling = useSelector(s => s.isFalling);
 
   const renderImagePicker = () => {
     if (picture) {
@@ -87,11 +91,12 @@ const UpdateProfileScreen = props => {
 
   return (
     <View style={styles.screen}>
+      {isFalling.status && <FallingModal />}
       <View style={styles.postHeader}>
-        <BackPressButton />
+        <BackPressButton color={'#ffffff'} />
         <Text style={styles.title}>Modifier mon profile</Text>
         <TouchableOpacity style={styles.check}>
-          <Feather name={'save'} size={32} />
+          <Feather name={'save'} size={32} color={'#ffffff'} />
         </TouchableOpacity>
       </View>
       {renderImagePicker()}
