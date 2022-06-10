@@ -12,7 +12,9 @@ import PostNewsScreen from '../../screens/PostNewsScreen/PostNewsScreen';
 import PostRoadTripScreen from '../../screens/PostRoadTripScreen/PostRoadTripScreen';
 import UpdatePasswordScreen from '../../screens/UpdatePasswordScreen/UpdatePasswordScreen';
 import ProfileNewsScreen from '../../screens/ProfileNewsScreen/ProfileNewsScreen';
-import {Modal, Text} from 'react-native';
+import NewScreen from '../../screens/NewScreen/NewScreen';
+import MemberRoadScreen from '../../screens/MemberRoadScreen/MemberRoadScreen';
+import PremiumScreen from '../../screens/PremiumScreen/PremiumScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +33,9 @@ const AppNavigator = props => {
       <Stack.Screen name="PostNews" component={PostNewsScreen} />
       <Stack.Screen name="PostRoadTrip" component={PostRoadTripScreen} />
       <Stack.Screen name="ProfileNews" component={ProfileNewsScreen} />
+      <Stack.Screen name="New" component={NewScreen} />
+      <Stack.Screen name="MemberRoad" component={MemberRoadScreen} />
+      <Stack.Screen name="Premium" component={PremiumScreen} />
     </Stack.Navigator>
   );
 };

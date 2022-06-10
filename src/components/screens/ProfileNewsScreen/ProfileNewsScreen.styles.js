@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   profile_picture: {
-    width: 128,
-    height: 128,
+    width: 102,
+    height: 102,
     borderRadius: 80,
     padding: 20,
   },

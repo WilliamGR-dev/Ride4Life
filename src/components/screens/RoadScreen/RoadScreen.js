@@ -25,10 +25,13 @@ import Feather from 'react-native-vector-icons/Feather';
 import SubmitButton from '../../buttons/SubmitButton/SubmitButton';
 import {useSelector} from 'react-redux';
 import FallingModal from '../../modals/FallingModal/FallingModal';
+import {useNavigator} from '../../../hooks';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 
 const RoadScreen = props => {
   const {data, refreshing, onRefresh} = useController(props);
   const isFalling = useSelector(s => s.isFalling);
+  const {goToMemberRoad} = useNavigator();
 
   if (!data) {
     return <LoadingIndicator full />;
@@ -62,6 +65,10 @@ const RoadScreen = props => {
               <Ionicons name={'time'} size={20} />{' '}
               {moment(data.date).format('DD/MM/YYYY hh:mm')}
             </Text>
+
+            <Text style={styles.cardDistance}>
+              <Fontisto name={'map'} color={'#ffffff'} /> Trajet
+            </Text>
           </View>
           <Text style={styles.cardSubtitle}>
             <Feather name={'user'} size={20} />
@@ -70,27 +77,31 @@ const RoadScreen = props => {
           <Text style={styles.cardSubtitle}>{data.message}</Text>
           <View style={styles.entrantCountainer}>
             <View style={styles.entrants}>
-              <Image
-                style={styles.profilePicture}
-                source={{
-                  uri: 'https://archzine.fr/wp-content/uploads/2015/04/casque-moto-modulable-casque-original-horeur.jpg',
-                }}
-              />
-              <Image
-                style={styles.profilePicture}
-                source={{
-                  uri: 'https://www.techno-car.fr/wp-content/uploads/2021/07/4%20Casque%20carbone.jpg',
-                }}
-              />
-              <Image
-                style={styles.profilePicture}
-                source={{
-                  uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
-                }}
-              />
-              <View style={styles.otherEntrants}>
-                <Text style={styles.entrantsText}>+50</Text>
-              </View>
+              <TouchableOpacity
+                style={styles.entrants}
+                onPress={goToMemberRoad}>
+                <Image
+                  style={styles.profilePicture}
+                  source={{
+                    uri: 'https://archzine.fr/wp-content/uploads/2015/04/casque-moto-modulable-casque-original-horeur.jpg',
+                  }}
+                />
+                <Image
+                  style={styles.profilePicture}
+                  source={{
+                    uri: 'https://www.techno-car.fr/wp-content/uploads/2021/07/4%20Casque%20carbone.jpg',
+                  }}
+                />
+                <Image
+                  style={styles.profilePicture}
+                  source={{
+                    uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
+                  }}
+                />
+                <View style={styles.otherEntrants}>
+                  <Text style={styles.entrantsText}>+50</Text>
+                </View>
+              </TouchableOpacity>
             </View>
             <SubmitButton width={150} label={'Rejoindre'} road_trip />
           </View>

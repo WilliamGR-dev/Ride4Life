@@ -2,21 +2,17 @@ import {useCallback, useEffect, useState} from 'react';
 import {dispatch, store} from '../../../redux/store';
 
 const useController = () => {
-  const [remainingTime, setRemainingTime] = useState(60);
+  const [choice, setChoice] = useState();
+  const [choiceList, setChoiceList] = useState([]);
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      let time = remainingTime;
-      setRemainingTime(time - 1);
-    }, 1000);
-    return () => clearTimeout(intervalId);
-  });
-  const noProblem = useCallback(() => {
-    dispatch('isFalling', {
-      status: false,
-    });
+    setChoiceList([
+      {label: 'Bordeaux', value: 'Bordeaux'},
+      {label: 'Paris', value: 'Paris'},
+    ]);
+    return false;
   }, []);
 
-  return {noProblem, remainingTime};
+  return {choice, setChoice, choiceList};
 };
 
 export default useController;

@@ -15,7 +15,7 @@ const NewsCard = props => {
   const {isMore, setIsMore, numOfLines, onTextLayout, isLiked, setIsLiked} =
     useController(props);
 
-  const {goToComment, goToProfileNews} = useNavigator();
+  const {goToComment, goToProfileNews, goToNew} = useNavigator();
 
   return (
     <View style={styles.card}>
@@ -34,12 +34,14 @@ const NewsCard = props => {
         </View>
       </View>
       <View>
-        <Image
-          style={styles.picture}
-          source={{
-            uri: 'https://cdn.discordapp.com/attachments/672504727199678486/976464626457927710/IMG-20220508-WA0013.jpg',
-          }}
-        />
+        <TouchableOpacity onPress={goToNew}>
+          <Image
+            style={styles.picture}
+            source={{
+              uri: 'https://cdn.discordapp.com/attachments/672504727199678486/976464626457927710/IMG-20220508-WA0013.jpg',
+            }}
+          />
+        </TouchableOpacity>
 
         <View style={styles.actionCountainer}>
           {isLiked ? (

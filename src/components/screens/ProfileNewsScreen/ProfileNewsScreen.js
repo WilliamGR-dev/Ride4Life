@@ -17,7 +17,7 @@ import BackPressButton from '../../buttons/BackPressButton/BackPressButton';
 const ProfileNewsScreen = props => {
   const isFalling = useSelector(s => s.isFalling);
 
-  const {goToUpdateProfile, goToUpdatePassword} = useNavigator();
+  const {goToNew, goToUpdatePassword} = useNavigator();
 
   return (
     <View style={styles.screen}>
@@ -49,7 +49,7 @@ const ProfileNewsScreen = props => {
         </View>
       </View>
       <View style={styles.account_container}>
-        <TouchableOpacity style={styles.news}>
+        <TouchableOpacity style={styles.news} onPress={goToNew}>
           <Image
             style={styles.news_image}
             source={{
@@ -58,7 +58,7 @@ const ProfileNewsScreen = props => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.news}>
+        <TouchableOpacity style={styles.news} onPress={goToNew}>
           <Image
             style={styles.news_image}
             source={{
@@ -67,7 +67,7 @@ const ProfileNewsScreen = props => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.news}>
+        <TouchableOpacity style={styles.news} onPress={goToNew}>
           <Image
             style={styles.news_image}
             source={{

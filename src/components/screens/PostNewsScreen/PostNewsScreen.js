@@ -27,7 +27,6 @@ import SubmitButton from '../../buttons/SubmitButton/SubmitButton';
 import NewsCard from '../../cards/NewsCard/NewsCard';
 import CommentsCard from '../../cards/CommentsCard/CommentsCard';
 import HitSlopTouchableOpacity from '../../extends/HitSlopTouchableOpacity/HitSlopTouchableOpacity';
-import {RNCamera} from 'react-native-camera';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FallingModal from '../../modals/FallingModal/FallingModal';

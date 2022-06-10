@@ -12,12 +12,13 @@ import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FallingModal from '../../modals/FallingModal/FallingModal';
 import {useSelector} from 'react-redux';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const ProfileScreen = props => {
   const isFalling = useSelector(s => s.isFalling);
   const {logout} = useController(props);
 
-  const {goToUpdateProfile, goToUpdatePassword} = useNavigator();
+  const {goToUpdateProfile, goToUpdatePassword, goToPremium} = useNavigator();
 
   return (
     <View style={styles.screen}>
@@ -46,6 +47,12 @@ const ProfileScreen = props => {
           onPress={goToUpdatePassword}>
           <FontAwesome size={26} name={'cog'} color={'#ffffff'} />
           <Text style={styles.title_container}>Modifier le mot de passe</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button_container}
+          onPress={goToUpdatePassword}>
+          <FontAwesome5 size={26} name={'money-bill-wave'} color={'#ffffff'} />
+          <Text style={styles.title_container}>Premium</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button_container} onPress={logout}>
           <MaterialIcons size={26} name={'logout'} color={'#ffffff'} />

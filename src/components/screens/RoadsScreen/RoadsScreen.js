@@ -12,11 +12,13 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigator} from '../../../hooks';
 import HitSlopTouchableOpacity from '../../extends/HitSlopTouchableOpacity/HitSlopTouchableOpacity';
 import FallingModal from '../../modals/FallingModal/FallingModal';
+import RoadFilterModal from '../../modals/RoadFilterModal/RoadFilterModal';
 import {useSelector} from 'react-redux';
 
 const RoadsScreen = props => {
   const {PostRoadTrip} = useNavigator();
-  const {data, refreshing, onRefresh} = useController(props);
+  const {data, refreshing, onRefresh, showFilterModal, setShowFilterModal} =
+    useController(props);
   const isFalling = useSelector(s => s.isFalling);
 
   if (!data) {
@@ -30,12 +32,16 @@ const RoadsScreen = props => {
   return (
     <View style={styles.screen}>
       {isFalling.status && <FallingModal />}
+      {showFilterModal && <RoadFilterModal />}
       <View style={styles.header}>
         <HitSlopTouchableOpacity onPress={PostRoadTrip}>
           <FontAwesome name={'plus'} size={16} color={'#ffffff'} />
         </HitSlopTouchableOpacity>
         <Text style={styles.title}>{t('roads_screen.title')}</Text>
-        <HitSlopTouchableOpacity>
+        <HitSlopTouchableOpacity
+          onPress={() => {
+            setShowFilterModal(true);
+          }}>
           <FontAwesome name={'filter'} size={16} color={'#ffffff'} />
         </HitSlopTouchableOpacity>
       </View>
