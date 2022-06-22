@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const avatarWidth = 150;
 
 const styles = StyleSheet.create({
-  screen: {flex: 1, height: '100%', backgroundColor: '#27313d'},
+  screen: {flex: 1, height: '100%', backgroundColor: '#242D3C'},
   section: {flex: 1},
   send_message: {flexDirection: 'row', alignItems: 'center'},
   postHeader: {

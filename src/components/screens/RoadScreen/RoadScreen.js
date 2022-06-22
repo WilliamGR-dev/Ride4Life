@@ -103,7 +103,7 @@ const RoadScreen = props => {
                 </View>
               </TouchableOpacity>
             </View>
-            <SubmitButton width={150} label={'Rejoindre'} road_trip />
+            <SubmitButton width={150} label={'REJOINDRE'} road_trip />
           </View>
         </LinearGradient>
       </ImageBackground>

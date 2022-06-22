@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     padding: 5,
     zIndex: 4,
-    backgroundColor: '#27313d',
+    backgroundColor: '#242D3C',
     height: '100%',
     width: '100%',
   },
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   suggestions: {
-    backgroundColor: '#27313d',
+    backgroundColor: '#242D3C',
     color: '#ffffff',
     padding: 5,
     fontSize: 18,
@@ -64,33 +64,36 @@ const styles = StyleSheet.create({
   informationContainer: {
     width: '90%',
     paddingBottom: 20,
+    marginBottom: 75,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   locationImage: {
     height: 21,
     width: 16,
   },
   searchButton: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#0C57E6',
     borderRadius: 32,
     padding: 10,
-    height: 48,
-    width: 48,
+    height: 45,
+    width: 45,
     justifyContent: 'center',
     alignItems: 'center',
   },
   speedContainer: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#0C57E6',
     borderRadius: 32,
     padding: 10,
-    height: 48,
-    width: 48,
+    height: 55,
+    width: 93,
     justifyContent: 'center',
     alignItems: 'center',
   },
   speedText: {
-    fontSize: 10,
+    fontSize: 15,
+    color: '#ffffff',
   },
 });
 
@@ -383,7 +386,7 @@ const MapScreen = props => {
                 onPress={() => {
                   setSearching(true);
                 }}>
-                <FontAwesome size={24} name={'search'} />
+                <FontAwesome size={18} color={'#ffffff'} name={'search'} />
               </TouchableOpacity>
             </View>
             <View style={styles.speedContainer}>

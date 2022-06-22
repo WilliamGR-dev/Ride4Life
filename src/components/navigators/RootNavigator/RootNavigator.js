@@ -25,6 +25,8 @@ const RootNavigator = props => {
   let navComponentProps;
   if (!userAuth) {
     NavComponent = AuthNavigator;
+  } else if (!userAuth) {
+    NavComponent = AuthNavigator;
   } else {
     NavComponent = AppNavigator;
   }

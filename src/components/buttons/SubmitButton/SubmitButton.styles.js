@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 32,
+    borderRadius: 8,
     marginVertical: 7,
   },
   text: {
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(196,196,196,0.5)',
   },
   light: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#0C57E6',
   },
   light_outline: {
     backgroundColor: 'rgba(255,255,255,0)',
-    borderColor: '#ffffff',
-    borderWidth: 4,
+    borderColor: '#0C57E6',
+    borderWidth: 1,
   },
   dark: {
     backgroundColor: '#000000',
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ec2323',
   },
   road_trip: {
-    backgroundColor: '#282a2e',
+    backgroundColor: '#0C57E6',
     borderRadius: 12,
   },
   text_road_trip: {

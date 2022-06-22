@@ -2,9 +2,15 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
+    position: 'absolute',
+    zIndex: 9999,
+    width: '90%',
+    borderRadius: 13,
+    bottom: 0,
+    margin: 15,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#1d2635',
+    backgroundColor: '#0A111D',
     paddingTop: 15,
   },
   btn: {
@@ -17,7 +23,7 @@ export default StyleSheet.create({
     tintColor: '#c5c5c5',
   },
   btnImageFocused: {
-    tintColor: '#5597c7',
+    tintColor: '#0C57E6',
   },
   btnLabel: {
     color: '#c5c5c5',
@@ -25,6 +31,6 @@ export default StyleSheet.create({
     marginTop: 3,
   },
   btnLabelFocused: {
-    color: '#5597c7',
+    color: '#0C57E6',
   },
 });

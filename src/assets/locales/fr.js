@@ -58,11 +58,11 @@ module.exports = {
   auth_home_screen: {
     pharmacist_access: 'ACCÈS PROFESSIONNEL',
     sampler_access: 'ACCÈS PRÉLEVEUR',
-    login: "S'identifier",
-    register: 'Ouvrir un compte',
+    login: "S'IDENTIFIER",
+    register: 'CREER UN COMPTE',
   },
   auth_login_screen: {
-    title: 'CONNEXION',
+    title: 'Connexion',
     email: 'Email',
     password: 'Mot de passe',
     forgot_password: 'Mot de passe oublié ?',
@@ -82,9 +82,10 @@ module.exports = {
       'Un mail vous a été envoyé pour réinitialiser votre mot de passe',
   },
   auth_register_screen: {
-    title: 'INSCRIPTION',
+    title: 'Inscription',
     firstname: 'Prénom',
     lastname: 'Nom',
+    username: 'Pseudo',
     email: 'Email',
     password: 'Mot de passe',
     submit: "S'inscrire",

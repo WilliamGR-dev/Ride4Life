@@ -8,7 +8,6 @@ import Config from '../config';
 
 const serviceBaseUrlMapping = {
   api: Config.API_URL,
-  chat: Config.CHAT_URL,
 };
 
 export const request = async (
@@ -26,7 +25,7 @@ export const request = async (
 
   const defaultHeaders = {
     Accept: 'application/json',
-    'Content-Type': isMultipart ? 'multipart/form-data' : 'application/json',
+    'Content-Type': 'application/json',
   };
 
   const headers = {
@@ -55,6 +54,8 @@ export const request = async (
         return status < 500;
       },
     });
+
+    console.log(res);
 
     if (res.status === 403 && ['user_not_found'].includes(res.data.code)) {
       await authService.removeAuth();

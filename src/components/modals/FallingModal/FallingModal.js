@@ -6,7 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import useController from '../../modals/FallingModal/FallingModal.controller';
 
 const FallingModal = props => {
-  const {noProblem, remainingTime} = useController(props);
+  const {noProblem, gotProblem, remainingTime} = useController(props);
   return (
     <View>
       <Modal transparent={true}>
@@ -19,7 +19,7 @@ const FallingModal = props => {
           <View style={styles.buttonContainer}>
             <HitSlopTouchableOpacity
               style={styles.buttonContainerAlert}
-              onPress={() => noProblem()}>
+              onPress={() => gotProblem()}>
               <View style={styles.iconContainer}>
                 <MaterialIcons
                   name={'local-phone'}

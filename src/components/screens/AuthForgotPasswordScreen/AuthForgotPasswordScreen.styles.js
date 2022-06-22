@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#F6F6F6',
+    backgroundColor: '#242D3C',
   },
   container: {
     flex: 1,
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   section: {
     width: '80%',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#242D3C',
     borderRadius: 27,
     marginTop: 50,
     alignItems: 'center',
@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
   sectionText: {
     fontSize: 20,
     fontWeight: '500',
-    color: '#000000',
+    color: '#ffffff',
     marginBottom: 10,
   },
   goBackBtn: {
     marginTop: 15,
   },
   goBackText: {
-    color: '#000000',
+    color: '#ffffff',
     textDecorationLine: 'underline',
   },
   input: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   infoText: {
-    color: '#656363',
+    color: '#ffffff',
     fontSize: 13,
     marginHorizontal: 50,
     textAlign: 'center',

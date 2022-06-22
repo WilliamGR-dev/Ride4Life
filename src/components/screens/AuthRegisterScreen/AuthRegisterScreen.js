@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Platform, ScrollView} from 'react-native';
+import {View, Text, Platform, ScrollView, Image} from 'react-native';
 import {t} from 'react-i18nify';
 
 import styles from './AuthRegisterScreen.styles';
@@ -18,6 +18,8 @@ const AuthRegisterScreen = props => {
     setFirstName,
     lastname,
     setLastName,
+    username,
+    setUserName,
     password,
     setPassword,
     hasError,
@@ -29,7 +31,13 @@ const AuthRegisterScreen = props => {
     <ScrollView scrollEnabled={false} style={styles.screen}>
       <View style={styles.container}>
         <View style={styles.goBackBtn}>
-          <BackPressButton />
+          <BackPressButton color={'#ffffff'} />
+          <Image
+            source={{
+              uri: 'https://cdn.discordapp.com/attachments/672504727199678486/986721250028163112/unknown.png',
+            }}
+            style={styles.logo}
+          />
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionText}>
@@ -49,6 +57,16 @@ const AuthRegisterScreen = props => {
             value={lastname}
             onChangeText={setLastName}
             label={t('auth_register_screen.lastname')}
+            style={styles.input}
+            keyboardType={'email-address'}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            error={hasError}
+          />
+          <AuthTextInput
+            value={username}
+            onChangeText={setUserName}
+            label={t('auth_register_screen.username')}
             style={styles.input}
             keyboardType={'email-address'}
             autoCapitalize={'none'}
@@ -82,7 +100,7 @@ const AuthRegisterScreen = props => {
             disabled={!email || !password}
             isSubmitting={isSubmitting}
             text_outline
-            dark
+            light
           />
         </View>
       </View>

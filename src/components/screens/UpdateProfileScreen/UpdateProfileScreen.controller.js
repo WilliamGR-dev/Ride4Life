@@ -1,45 +1,66 @@
 import {useCallback, useEffect, useState} from 'react';
 
 import {useRefresh} from '../../../hooks';
+import {useSelector} from 'react-redux';
+import imagePickerHelper from '../../../helpers/imagePickerHelper';
+import {store} from '../../../redux/store';
+import apiHelper from '../../../helpers/apiHelper';
+import authService from '../../../services/authService';
 
 const useController = ({}) => {
   const [data, setData] = useState(null);
-  const [username, setUsername] = useState('Spartan_25');
-  const [firstname, setFirstname] = useState('William');
-  const [lastname, setLastname] = useState('Girard-Reydet');
-  const [email, setEmail] = useState('wgirardreydet@gmail.com');
+  const [username, setUsername] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [picture, setPicture] = useState(null);
+  const [hasError, setHasError] = useState(false);
+
+  const userAuth = useSelector(s => s.userAuth);
 
   const loadNews = useCallback(async () => {
-    // const res = await apiHelper.getNews();
+    console.log(userAuth);
+    setUsername(userAuth.username);
+    setFirstname(userAuth.firstname);
+    setLastname(userAuth.lastname);
+    setEmail(userAuth.email);
+    setPicture(userAuth.profile_picture);
 
-    // if (res.status !== 200) {
-    //   return;
-    // }
-
-    // setData(res.content.results);
-    setData([
-      {
-        id: 1,
-        title: null,
-        message: 'Lorem ipsum dolor.',
-        display_start: '2022-04-13T00:00:00+02:00',
-        display_end: '2022-11-13T23:59:59+01:00',
-        target: 'EVERYBODY',
-        created_at: '2022-04-13T16:45:31.407225+02:00',
-      },
-      {
-        id: 2,
-        title: null,
-        message:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\nmolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\nnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\noptio, eaque rerum!',
-        display_start: '2022-04-01T00:00:00+02:00',
-        display_end: '2022-04-30T23:59:59+02:00',
-        target: 'PHARMACIES',
-        created_at: '2022-04-26T12:57:38.988157+02:00',
-      },
-    ]);
     return;
+  }, [userAuth]);
+
+  const addPicture = useCallback(async source => {
+    const options = {
+      includeBase64: true,
+      compressImageMaxWidth: 1024,
+      mediaType: 'photo',
+      forceJpg: true,
+    };
+
+    try {
+      const result = await imagePickerHelper.getImageFromPicker(
+        options,
+        source,
+      );
+
+      setPicture(result);
+    } catch {}
   }, []);
+
+  const submit = useCallback(async () => {
+    console.log(store.getState().userAuth);
+    const res = await apiHelper.updateProfile(
+      username,
+      firstname,
+      lastname,
+      email,
+      picture,
+    );
+
+    if (res.status !== 200) {
+      return setHasError(true);
+    }
+  }, [email, firstname, lastname, picture, username]);
 
   const [refreshing, onRefresh] = useRefresh(async () => {
     await loadNews();
@@ -63,6 +84,8 @@ const useController = ({}) => {
     setLastname,
     email,
     setEmail,
+    addPicture,
+    submit,
   };
 };
 

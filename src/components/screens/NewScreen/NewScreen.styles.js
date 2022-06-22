@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#27313d',
+    backgroundColor: '#242D3C',
     height: '100%',
   },
   owner: {

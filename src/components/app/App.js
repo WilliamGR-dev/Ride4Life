@@ -18,10 +18,10 @@ import {store, persistor} from '../../redux/store';
 
 const theme = {
   ...DefaultTheme,
+  fontFamily: 'Raleway-Regular',
   colors: {
     text: '#ffffff',
     primary: '#ffffff',
-    // background: string;
     card: '#ffffff',
     border: '#ffffff',
     notification: '#ffffff',

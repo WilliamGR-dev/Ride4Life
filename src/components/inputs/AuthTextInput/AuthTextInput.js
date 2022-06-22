@@ -18,8 +18,8 @@ const AuthTextInput = props => {
       ref={props.inputRef}
       mode="outlined"
       returnKeyType={'done'}
-      outlineColor={props.error ? 'red' : '#707070'}
-      placeholderTextColor={props.error ? 'red' : '#707070'}
+      outlineColor={props.error ? 'red' : '#ffffff'}
+      placeholderTextColor={props.error ? 'red' : '#ffffff'}
       dense
       theme={theme}
       right={

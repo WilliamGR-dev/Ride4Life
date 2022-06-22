@@ -7,6 +7,7 @@ const useController = ({}) => {
   const [email, setEmail] = useState('');
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [hasError, setHasError] = useState(false);
 
@@ -16,7 +17,14 @@ const useController = ({}) => {
 
   const submit = useCallback(async () => {
     await preventMultipleSubmit(async () => {
-      const res = await apiHelper.forgottenPassword(email);
+      const res = await apiHelper.register(
+        firstname,
+        lastname,
+        username,
+        email,
+        password,
+      );
+      console.log(res.content);
 
       if (res.status !== 200) {
         return setHasError(true);
@@ -26,7 +34,15 @@ const useController = ({}) => {
 
       goBack();
     });
-  }, [email, goBack, preventMultipleSubmit]);
+  }, [
+    email,
+    firstname,
+    goBack,
+    lastname,
+    password,
+    preventMultipleSubmit,
+    username,
+  ]);
 
   return {
     email,
@@ -35,6 +51,8 @@ const useController = ({}) => {
     setFirstName,
     lastname,
     setLastName,
+    username,
+    setUserName,
     password,
     setPassword,
     hasError,

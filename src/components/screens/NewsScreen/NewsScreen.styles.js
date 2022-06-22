@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   noPermissionContainer: {
     flex: 1,
-    backgroundColor: '#27313d',
+    backgroundColor: '#242D3C',
     alignItems: 'center',
     justifyContent: 'center',
   },

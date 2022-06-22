@@ -2,11 +2,31 @@ import {request} from '../services/axiosService';
 
 // -- Auth
 
-export const login = async (username, password) => {
-  const route = '/token/';
+export const login = async (email, password) => {
+  const route = '/login';
 
   const body = {
+    email,
+    password,
+  };
+
+  return request('api', 'post', false, route, null, body);
+};
+
+export const register = async (
+  firstname,
+  lastname,
+  username,
+  email,
+  password,
+) => {
+  const route = '/register';
+
+  const body = {
+    firstname,
+    lastname,
     username,
+    email,
     password,
   };
 
@@ -129,12 +149,21 @@ export const unlinkDevice = async onesignalId => {
   return request('api', 'delete', true, route, null, body);
 };
 
-export const updateProfile = async (samplerId, firstName, lastName) => {
+export const updateProfile = async (
+  username,
+  firstname,
+  lastname,
+  email,
+  picture,
+) => {
   const route = '/v2/users/me';
 
   const body = {
-    first_name: firstName,
-    last_name: lastName,
+    username: username,
+    firstname: firstname,
+    lastname: lastname,
+    email: email,
+    picture: picture,
   };
 
   return request('api', 'patch', true, route, null, body);
@@ -593,6 +622,7 @@ export const getNews = async () => {
 
 export default {
   login,
+  register,
   refreshAuth,
 
   getSessions,

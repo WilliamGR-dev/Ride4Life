@@ -21,12 +21,12 @@ const TabNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}
-      sceneContainerStyle={{backgroundColor: '#27313d'}}>
+      sceneContainerStyle={{backgroundColor: '#0A111D'}}>
       <Tab.Screen
         name="Map"
         component={MapScreen}
         options={{
-          tabBarImage: require('../../../assets/images/tabBar/map.png'),
+          tabBarImage: require('../../../assets/images/tabBar/map-s.png'),
           tabBarImageS: require('../../../assets/images/tabBar/map-s.png'),
         }}
       />
@@ -42,7 +42,7 @@ const TabNavigator = () => {
         name="News"
         component={NewsScreen}
         options={{
-          tabBarImage: require('../../../assets/images/tabBar/news.png'),
+          tabBarImage: require('../../../assets/images/tabBar/news-s.png'),
           tabBarImageS: require('../../../assets/images/tabBar/news-s.png'),
         }}
       />
@@ -50,7 +50,7 @@ const TabNavigator = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarImage: require('../../../assets/images/tabBar/profile.png'),
+          tabBarImage: require('../../../assets/images/tabBar/profile-s.png'),
           tabBarImageS: require('../../../assets/images/tabBar/profile-s.png'),
         }}
       />

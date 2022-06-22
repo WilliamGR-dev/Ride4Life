@@ -26,6 +26,7 @@ const UpdateProfileScreen = props => {
     setLastName,
     email,
     setEmail,
+    submit,
   } = useController(props);
 
   const isFalling = useSelector(s => s.isFalling);
@@ -96,7 +97,7 @@ const UpdateProfileScreen = props => {
         <BackPressButton color={'#ffffff'} />
         <Text style={styles.title}>Modifier mon profile</Text>
         <TouchableOpacity style={styles.check}>
-          <Feather name={'save'} size={32} color={'#ffffff'} />
+          <Feather onPress={submit} name={'save'} size={32} color={'#ffffff'} />
         </TouchableOpacity>
       </View>
       {renderImagePicker()}

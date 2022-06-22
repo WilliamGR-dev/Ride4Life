@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: 'white',
-    color: '#000',
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: '#ffffff',
   },
 });
 

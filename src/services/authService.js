@@ -16,12 +16,6 @@ export const getJwtExpireDate = jwtToken => {
   return new Date(exp * 1000);
 };
 
-export const getJwtUserId = jwtToken => {
-  const [, payload] = jwtToken.split('.');
-  const {user_id} = JSON.parse(decode(payload));
-  return user_id;
-};
-
 export const getAuth = () => {
   return store.getState().userAuth;
 };
@@ -29,7 +23,6 @@ export const getAuth = () => {
 export const setAuth = auth => {
   dispatch('userAuth', {
     ...auth,
-    userId: getJwtUserId(auth.access),
   });
 };
 
@@ -44,43 +37,16 @@ export const authenticate = async () => {
     return null;
   }
 
-  const currentDate = new Date();
-
-  //-- si token access valide
-  const accessExpDate = getJwtExpireDate(auth.access);
-  if (currentDate < accessExpDate) {
-    return auth;
-  }
-
-  //-- si token refresh non valide
-  const refreshExpDate = getJwtExpireDate(auth.refresh);
-  if (currentDate >= refreshExpDate) {
-    await removeAuth();
-    return null;
-  }
-
-  ///-- si token pas en cours de refresh
-  if (!isTokenRefreshing) {
-    return refreshAuth();
-  }
-
-  //-- tant que token en cours de refresh (par une autre requete)
-  while (isTokenRefreshing) {
-    await systemService.sleep(200);
-  }
-
   return authenticate();
 };
 
 export const login = async auth => {
   setAuth(auth);
 
-  await socketService.connectClient();
   await deviceHelper.linkDevice();
 };
 
 export const logout = async () => {
-  await socketService.disconnectClient();
   await deviceHelper.unlinkDevice();
 
   removeAuth();

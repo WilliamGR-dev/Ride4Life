@@ -8,6 +8,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  logoContainer: {},
+  logo: {
+    alignSelf: 'center',
+    marginTop: 100,
+    width: 177,
+    height: 100,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -19,17 +26,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 40,
   },
-  logo: {
-    textAlign: 'center',
-    fontSize: 48,
-    fontWeight: '500',
-    color: '#000000',
-    marginTop: 50,
-  },
   sectionText: {
     fontSize: 20,
     fontWeight: '500',
-    color: '#000000',
+    color: '#ffffff',
     marginBottom: 10,
   },
 });

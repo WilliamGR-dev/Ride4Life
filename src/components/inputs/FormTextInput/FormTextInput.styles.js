@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: '#27313d',
+    backgroundColor: '#242D3C',
     color: '#fff',
   },
   errorText: {

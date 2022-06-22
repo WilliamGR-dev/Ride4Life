@@ -5,6 +5,16 @@ const reducersDefinition = [
     initialState: null,
   },
   {
+    type: 'openFirstTime',
+    isPersistent: true,
+    initialState: false,
+  },
+  {
+    type: 'position',
+    isPersistent: false,
+    initialState: null,
+  },
+  {
     type: 'app',
     isPersistent: true,
     initialState: {

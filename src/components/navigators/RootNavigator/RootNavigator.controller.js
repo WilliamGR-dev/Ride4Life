@@ -8,6 +8,7 @@ const useController = ({}) => {
   const userAuth = useSelector(s => s.userAuth);
   const app = useSelector(s => s.app);
   const userProfile = useSelector(s => s.userProfile);
+  const openFirstTime = useSelector(s => s.openFirstTime);
 
   useEffect(() => {
     systemService.checkAppUpdate();
@@ -20,7 +21,7 @@ const useController = ({}) => {
 
     // refreshUserProfileData();
   }, [userAuth]);
-  return {userAuth, app, userProfile};
+  return {userAuth, app, userProfile, openFirstTime};
 };
 
 export default useController;

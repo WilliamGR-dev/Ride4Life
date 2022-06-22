@@ -48,9 +48,7 @@ const ProfileScreen = props => {
           <FontAwesome size={26} name={'cog'} color={'#ffffff'} />
           <Text style={styles.title_container}>Modifier le mot de passe</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button_container}
-          onPress={goToUpdatePassword}>
+        <TouchableOpacity style={styles.button_container}>
           <FontAwesome5 size={26} name={'money-bill-wave'} color={'#ffffff'} />
           <Text style={styles.title_container}>Premium</Text>
         </TouchableOpacity>

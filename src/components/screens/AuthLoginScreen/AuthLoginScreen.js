@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {View, Text, Platform, ScrollView} from 'react-native';
+import {View, Text, Platform, ScrollView, Image} from 'react-native';
 import {t} from 'react-i18nify';
 
 import styles from './AuthLoginScreen.styles';
@@ -13,8 +13,8 @@ import BackPressButton from '../../buttons/BackPressButton/BackPressButton';
 
 const AuthLoginScreen = props => {
   const {
-    username,
-    setUsername,
+    email,
+    setEmail,
     password,
     setPassword,
     submit,
@@ -34,14 +34,20 @@ const AuthLoginScreen = props => {
       testID="AuthLoginScreen">
       <View style={styles.container}>
         <View style={styles.goBackBtn}>
-          <BackPressButton />
+          <BackPressButton color={'#ffffff'} />
+          <Image
+            source={{
+              uri: 'https://cdn.discordapp.com/attachments/672504727199678486/986721250028163112/unknown.png',
+            }}
+            style={styles.logo}
+          />
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionText}>{t('auth_login_screen.title')}</Text>
           <AuthTextInput
             testID="AuthLoginScreen.email"
-            value={username}
-            onChangeText={setUsername}
+            value={email}
+            onChangeText={setEmail}
             label={t('auth_login_screen.email')}
             style={styles.input}
             error={hasError}
@@ -69,10 +75,10 @@ const AuthLoginScreen = props => {
             onPress={submit}
             label={t('auth_login_screen.submit')}
             width={'80%'}
-            disabled={!username || !password}
+            disabled={!email || !password}
             isSubmitting={isSubmitting}
             text_outline
-            dark
+            light
           />
           <HitSlopTouchableOpacity
             onPress={goToAuthForgotPassword}

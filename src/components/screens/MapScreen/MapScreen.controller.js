@@ -13,6 +13,7 @@ import {
   setUpdateIntervalForType,
 } from 'react-native-sensors';
 import {PERMISSIONS} from 'react-native-permissions';
+import {dispatch} from '../../../redux/store';
 const useController = ({}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPermissionAuthorized, setIsPermissionAuthorized] = useState(false);
@@ -26,7 +27,10 @@ const useController = ({}) => {
 
   const requestPermission = useCallback(async () => {
     const permissions = Platform.select({
-      android: [PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION],
+      android: [
+        PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+        PERMISSIONS.ANDROID.SEND_SMS,
+      ],
       ios: [PERMISSIONS.IOS.LOCATION_WHEN_IN_USE],
     });
     const isAuthorized = await checkAndRequestMultiplePermissions(permissions);
@@ -34,8 +38,11 @@ const useController = ({}) => {
     if (isAuthorized) {
       Geolocation.getCurrentPosition(
         position => {
-          console.log(position);
           setCurrentPosition(position);
+
+          dispatch('position', {
+            position,
+          });
         },
         error => {
           // See error code charts below.
@@ -45,8 +52,10 @@ const useController = ({}) => {
       );
       Geolocation.watchPosition(
         position => {
-          console.log(position);
           setCurrentPosition(position);
+          dispatch('position', {
+            position,
+          });
         },
         error => {
           // See error code charts below.
@@ -80,7 +89,6 @@ const useController = ({}) => {
       const result = await fetch(apiUrl);
       const json = await result.json();
       setPredictions(json.predictions);
-      console.log(json);
     } catch (err) {
       console.error(err);
     }

@@ -17,39 +17,32 @@ import {dispatch, store} from '../../../redux/store';
 const useController = ({}) => {
   useDoubleBackPressExit();
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hasError, setHasError] = useState(false);
 
   const [isSubmitting, preventMultipleSubmit] = usePreventMultipleSubmit();
 
   const submit = useCallback(async () => {
-    dispatch('userAuth', {
-      true: true,
-    });
     console.log(store.getState().userAuth);
-    // await preventMultipleSubmit(async () => {
-    //   const res = await apiHelper.login(username, password);
-    //
-    //   if (res.status !== 200) {
-    //     return setHasError(true);
-    //   }
-    //
-    //   if (res.content.type !== 'sampler') {
-    //     return alertHelper.informAccountNotSampler();
-    //   }
-    //
-    //   await authService.login(res.content);
-    // });
-  }, [password, preventMultipleSubmit, username]);
+    await preventMultipleSubmit(async () => {
+      const res = await apiHelper.login(email, password);
+
+      if (res.status !== 200) {
+        return setHasError(true);
+      }
+
+      await authService.login(res.content);
+    });
+  }, [password, preventMultipleSubmit, email]);
 
   const linkToRegister = useCallback(() => {
     Linking.openURL(Config.REGISTER_URI);
   }, []);
 
   return {
-    username,
-    setUsername,
+    email,
+    setEmail,
     password,
     setPassword,
     submit,

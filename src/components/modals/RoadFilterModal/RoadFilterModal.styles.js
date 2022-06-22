@@ -1,6 +1,14 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+  modal: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 9,
+  },
   modalContainer: {
     flex: 1,
     justifyContent: 'space-around',
@@ -8,6 +16,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#0F5959',
     margin: 20,
     borderRadius: 20,
+  },
+  inputContainer: {
+    width: '100%',
+    height: 50,
+    marginBottom: 20,
   },
   title: {
     fontSize: 22,
