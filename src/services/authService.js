@@ -1,12 +1,8 @@
 import {decode} from 'base-64';
 
-import systemService from './systemService';
-
 import apiHelper from '../helpers/apiHelper';
-import deviceHelper from '../helpers/deviceHelper';
 
 import {store, dispatch} from '../redux/store';
-import socketService from './socketService';
 
 let isTokenRefreshing = false;
 
@@ -42,13 +38,9 @@ export const authenticate = async () => {
 
 export const login = async auth => {
   setAuth(auth);
-
-  await deviceHelper.linkDevice();
 };
 
 export const logout = async () => {
-  await deviceHelper.unlinkDevice();
-
   removeAuth();
 };
 

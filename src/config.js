@@ -13,8 +13,8 @@ if (!envConfig[env]) {
 
 const config = {
   ENV: env,
-  APP_ID: 'fr.sidapp.rnclient',
-  SUPPORT_EMAIL: 'support@pharnumx.com',
+  APP_ID: 'fr.rider.rnclient',
+  SUPPORT_EMAIL: 'support@rider4life.com',
   ...envConfig[env],
 };
 
