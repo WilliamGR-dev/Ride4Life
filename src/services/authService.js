@@ -28,12 +28,11 @@ export const removeAuth = () => {
 
 export const authenticate = async () => {
   const auth = getAuth();
-
   if (!auth) {
     return null;
   }
 
-  return authenticate();
+  return auth;
 };
 
 export const login = async auth => {

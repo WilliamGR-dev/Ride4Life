@@ -16,6 +16,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const ProfileScreen = props => {
   const isFalling = useSelector(s => s.isFalling);
+  const userAuth = useSelector(s => s.userAuth);
   const {logout} = useController(props);
 
   const {goToUpdateProfile, goToUpdatePassword, goToPremium} = useNavigator();
@@ -28,11 +29,11 @@ const ProfileScreen = props => {
           <Image
             style={styles.profile_picture}
             source={{
-              uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
+              uri: userAuth.profile_picture,
             }}
           />
         </View>
-        <Text style={styles.name}>William</Text>
+        <Text style={styles.name}>{userAuth.username}</Text>
         <Text style={styles.join_date}>Rejoint le 26 avr. 2022</Text>
       </View>
       <View style={styles.account_container}>

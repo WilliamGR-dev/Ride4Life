@@ -120,12 +120,9 @@ const useNavigator = () => {
     navigation.navigate('InformPlanning', {});
   }, [navigation]);
 
-  const goToUpdateProfile = useCallback(
-    data => {
-      navigation.navigate('UpdateProfile', {data});
-    },
-    [navigation],
-  );
+  const goToUpdateProfile = useCallback(() => {
+    navigation.navigate('UpdateProfile');
+  }, [navigation]);
 
   const goToBilling = useCallback(
     data => {

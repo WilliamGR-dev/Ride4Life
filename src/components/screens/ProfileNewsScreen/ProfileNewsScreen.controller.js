@@ -3,15 +3,12 @@ import {useCallback, useEffect, useState} from 'react';
 import authService from '../../../services/authService';
 import alertHelper from '../../../helpers/alertHelper';
 import {useSelector} from 'react-redux';
-import {refreshUserProfileData} from '../../../helpers/reduxHelper';
 
 const useController = ({}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const userProfile = useSelector(s => s.userProfile);
 
-  useEffect(() => {
-    refreshUserProfileData();
-  }, []);
+  useEffect(() => {}, []);
 
   const goToFromModal = useCallback(goToScreen => {
     setIsModalVisible(false);

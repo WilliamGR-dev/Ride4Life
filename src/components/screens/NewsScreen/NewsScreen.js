@@ -43,7 +43,7 @@ const NewsScreen = props => {
         />
       </View>
       <TouchableOpacity style={styles.buttonAdd} onPress={goToPostNews}>
-        <FontAwesome name={'plus'} size={26} />
+        <FontAwesome name={'plus'} color={'#ffffff'} size={26} />
       </TouchableOpacity>
     </View>
   );

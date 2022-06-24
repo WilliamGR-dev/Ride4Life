@@ -14,12 +14,8 @@ const HeaderBar = () => {
       style={{
         ...styles.container,
         height: headerBarHeight,
-      }}>
-      <Image
-        source={require('../../../assets/images/logos/logo-sidapp.png')}
-        style={styles.logo}
-      />
-    </View>
+      }}
+    />
   );
 };
 

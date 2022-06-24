@@ -389,7 +389,7 @@ const PostRoadTripScreen = props => {
         <View>
           <View style={styles.proofActionContainer}>
             <SubmitButton
-              label={t('close_session_screen.from_camera')}
+              label={'Ajouter depuis la camera'}
               onPress={() => addPicture('camera')}
               light
             />

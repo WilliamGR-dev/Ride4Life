@@ -4,8 +4,6 @@ import {
   SensorTypes,
   setUpdateIntervalForType,
 } from 'react-native-sensors';
-import {refreshUserProfileData} from '../../../helpers/reduxHelper';
-import {Alert} from 'react-native';
 import {dispatch, store} from '../../../redux/store';
 let fallingDate = null;
 

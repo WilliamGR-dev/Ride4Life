@@ -2,11 +2,15 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   card: {
+    borderRadius: 15,
+    marginVertical: 10,
+    marginLeft: 10,
+  },
+  cardBody: {
     backgroundColor: 'rgba(255,255,255,0.9)',
     borderRadius: 15,
     marginVertical: 10,
-    paddingVertical: 20,
-    marginLeft: 10,
+    paddingBottom: 20,
   },
   owner: {
     flexDirection: 'row',
@@ -17,10 +21,10 @@ const styles = StyleSheet.create({
     height: 48,
     width: 48,
     borderRadius: 32,
-    marginLeft: 10,
   },
   username: {
     fontSize: 16,
+    color: '#ffffff',
     fontWeight: 'bold',
     marginLeft: 10,
   },
@@ -28,7 +32,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 30,
     position: 'absolute',
-    bottom: 40,
+    bottom: 20,
     justifyContent: 'space-between',
     width: '100%',
   },
@@ -38,29 +42,28 @@ const styles = StyleSheet.create({
   },
   actionUnlike: {
     backgroundColor: '#FC0B7B',
-    padding: 5,
+    padding: 10,
     borderRadius: 32,
   },
   actionLike: {
     backgroundColor: '#f1f1f1',
-    padding: 5,
+    padding: 10,
     borderRadius: 32,
   },
   countLikes: {
     backgroundColor: 'rgba(241,241,241,0.5)',
-    padding: 5,
+    padding: 10,
     marginLeft: 5,
     borderRadius: 32,
   },
   actionComment: {
     backgroundColor: '#f1f1f1',
-    padding: 5,
+    padding: 10,
     borderRadius: 32,
   },
   picture: {
-    width: '95%',
+    width: '100%',
     height: 380,
-    margin: 10,
     borderRadius: 15,
   },
   cardText: {
@@ -68,16 +71,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 5,
     paddingHorizontal: 10,
+    marginBottom: 10,
   },
   cardPlus: {
     color: 'rgba(86,86,86,0.4)',
     paddingHorizontal: 10,
     fontSize: 12,
-    paddingBottom: 10,
+    marginBottom: 10,
   },
   created_at: {
-    color: 'rgba(86,86,86,0.2)',
-    fontSize: 12,
+    color: '#949EAF',
+    fontSize: 13,
     paddingHorizontal: 10,
   },
 });

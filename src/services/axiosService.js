@@ -35,8 +35,8 @@ export const request = async (
   if (needAuth) {
     const auth = await authService.authenticate();
 
-    if (auth && auth.access) {
-      headers.Authorization = `JWT ${auth.access}`;
+    if (auth && auth.token) {
+      headers.Authorization = `Bearer ${auth.token}`;
     } else {
       return null;
     }

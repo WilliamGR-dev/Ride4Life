@@ -1,17 +1,8 @@
 import {useCallback, useEffect, useState} from 'react';
-
-import authService from '../../../services/authService';
-import alertHelper from '../../../helpers/alertHelper';
 import {useSelector} from 'react-redux';
-import {refreshUserProfileData} from '../../../helpers/reduxHelper';
 import Geolocation from 'react-native-geolocation-service';
 import {checkAndRequestMultiplePermissions} from '../../../services/permissionsService';
 import {Platform} from 'react-native';
-import {
-  accelerometer,
-  SensorTypes,
-  setUpdateIntervalForType,
-} from 'react-native-sensors';
 import {PERMISSIONS} from 'react-native-permissions';
 import {dispatch} from '../../../redux/store';
 const useController = ({}) => {
@@ -72,7 +63,6 @@ const useController = ({}) => {
   }, []);
   useEffect(() => {
     requestPermission();
-    refreshUserProfileData();
     //const sub = checkIfFall();
 
     return () => {

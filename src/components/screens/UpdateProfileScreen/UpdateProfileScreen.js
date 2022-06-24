@@ -26,6 +26,7 @@ const UpdateProfileScreen = props => {
     setLastName,
     email,
     setEmail,
+    isSubmitting,
     submit,
   } = useController(props);
 
@@ -39,7 +40,7 @@ const UpdateProfileScreen = props => {
             <Image
               style={styles.profilePicture}
               source={{
-                uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
+                uri: picture,
               }}
             />
             <View>
@@ -50,44 +51,46 @@ const UpdateProfileScreen = props => {
           <View>
             <View style={styles.proofImageContainer}>
               <Image source={{uri: picture.path}} style={styles.picture} />
-              <TouchableOpacity onPress={deletePicture} style={styles.cancel}>
+              <TouchableOpacity
+                onPress={() => deletePicture}
+                style={styles.cancel}>
                 <FontAwesome name={'close'} size={20} />
               </TouchableOpacity>
             </View>
           </View>
         </View>
       );
-    }
-
-    return (
-      <View style={styles.card}>
-        <View style={styles.owner}>
-          <Image
-            style={styles.profilePicture}
-            source={{
-              uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
-            }}
-          />
+    } else {
+      return (
+        <View style={styles.card}>
+          <View style={styles.owner}>
+            <Image
+              style={styles.profilePicture}
+              source={{
+                uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
+              }}
+            />
+            <View>
+              <Text style={styles.username}>{username}</Text>
+            </View>
+          </View>
           <View>
-            <Text style={styles.username}>{username}</Text>
+            <View style={styles.proofActionContainer}>
+              <SubmitButton
+                label={'Ajouter depuis la camera'}
+                onPress={() => addPicture('camera')}
+                light
+              />
+              <SubmitButton
+                label={'Ajouter depuis la galerie'}
+                onPress={() => addPicture('gallery')}
+                light
+              />
+            </View>
           </View>
         </View>
-        <View>
-          <View style={styles.proofActionContainer}>
-            <SubmitButton
-              label={t('close_session_screen.from_camera')}
-              onPress={() => addPicture('camera')}
-              light
-            />
-            <SubmitButton
-              label={'Ajouter depuis la galerie'}
-              onPress={() => addPicture('gallery')}
-              light
-            />
-          </View>
-        </View>
-      </View>
-    );
+      );
+    }
   };
 
   return (
@@ -96,8 +99,8 @@ const UpdateProfileScreen = props => {
       <View style={styles.postHeader}>
         <BackPressButton color={'#ffffff'} />
         <Text style={styles.title}>Modifier mon profile</Text>
-        <TouchableOpacity style={styles.check}>
-          <Feather onPress={submit} name={'save'} size={32} color={'#ffffff'} />
+        <TouchableOpacity onPress={() => submit()} style={styles.check}>
+          <Feather name={'save'} size={32} color={'#ffffff'} />
         </TouchableOpacity>
       </View>
       {renderImagePicker()}

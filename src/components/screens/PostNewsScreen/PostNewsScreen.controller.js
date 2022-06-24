@@ -1,5 +1,9 @@
 import {useCallback, useEffect, useState} from 'react';
 import imagePickerHelper from '../../../helpers/imagePickerHelper';
+import {store} from '../../../redux/store';
+import apiHelper from '../../../helpers/apiHelper';
+import authService from '../../../services/authService';
+import {useNavigator, usePreventMultipleSubmit} from '../../../hooks';
 
 const useController = ({}) => {
   const [data, setData] = useState(null);
@@ -8,6 +12,8 @@ const useController = ({}) => {
   const [numOfLines, setNumOfLines] = useState(0);
   const [picture, setPicture] = useState(null);
   const [description, setDescription] = useState('');
+
+  const [preventMultipleSubmit] = usePreventMultipleSubmit();
 
   const addPicture = useCallback(async source => {
     const options = {
@@ -40,6 +46,13 @@ const useController = ({}) => {
     [numOfLines],
   );
 
+  const submit = useCallback(async () => {
+    const res = await apiHelper.postNews(description, picture);
+    if (res.status !== 201) {
+      return false;
+    }
+  }, [description, picture]);
+
   useEffect(() => {
     //-- Mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,6 +72,7 @@ const useController = ({}) => {
     setIsLiked,
     description,
     setDescription,
+    submit,
   };
 };
 

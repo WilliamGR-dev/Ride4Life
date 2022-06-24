@@ -38,9 +38,9 @@ const styles = StyleSheet.create({
   },
   buttonAdd: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 100,
     right: 32,
-    backgroundColor: '#5597c7',
+    backgroundColor: '#0C57E6',
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 64,
