@@ -45,17 +45,20 @@ const UpdateProfileScreen = props => {
             />
             <View>
               <Text style={styles.username}>{username}</Text>
-              <Text style={styles.created_at}>il y a 2 heures</Text>
             </View>
           </View>
           <View>
-            <View style={styles.proofImageContainer}>
-              <Image source={{uri: picture.path}} style={styles.picture} />
-              <TouchableOpacity
-                onPress={() => deletePicture}
-                style={styles.cancel}>
-                <FontAwesome name={'close'} size={20} />
-              </TouchableOpacity>
+            <View style={styles.proofActionContainer}>
+              <SubmitButton
+                label={'Ajouter depuis la camera'}
+                onPress={() => addPicture('camera')}
+                light
+              />
+              <SubmitButton
+                label={'Ajouter depuis la galerie'}
+                onPress={() => addPicture('gallery')}
+                light
+              />
             </View>
           </View>
         </View>

@@ -12,8 +12,16 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigator} from '../../../hooks';
 
 const NewsCard = props => {
-  const {isMore, setIsMore, numOfLines, onTextLayout, isLiked, setIsLiked} =
-    useController(props);
+  const {
+    isMore,
+    setIsMore,
+    numOfLines,
+    onTextLayout,
+    isLiked,
+    setIsLiked,
+    likeNews,
+    unlikeNews,
+  } = useController(props);
 
   const {goToComment, goToProfileNews, goToNew} = useNavigator();
 
@@ -23,12 +31,13 @@ const NewsCard = props => {
         <Image
           style={styles.profilePicture}
           source={{
-            uri: 'https://cafe-racer-only.com/IMG/jpg/casque-moto-vintage-ruroc-atlas-3.0-fujin-2.jpg',
+            uri: props.news.author.profile_picture,
           }}
         />
         <View>
-          <TouchableOpacity onPress={goToProfileNews}>
-            <Text style={styles.username}>Spartan_25</Text>
+          <TouchableOpacity
+            onPress={() => goToProfileNews(props.news.author.id)}>
+            <Text style={styles.username}>{props.news.author.username}</Text>
           </TouchableOpacity>
           <Text style={styles.created_at}>
             {moment.duration(props.news.created_at, 'hours').humanize()}
@@ -37,7 +46,7 @@ const NewsCard = props => {
       </View>
       <View style={styles.cardBody}>
         <View>
-          <TouchableOpacity onPress={goToNew}>
+          <TouchableOpacity onPress={() => goToNew(props.news.id)}>
             <Image
               style={styles.picture}
               source={{
@@ -49,25 +58,33 @@ const NewsCard = props => {
           <View style={styles.actionCountainer}>
             {isLiked ? (
               <View style={styles.likeCountainer}>
-                <TouchableOpacity onPress={() => setIsLiked(false)}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsLiked(false);
+                    unlikeNews(props.news.id);
+                  }}>
                   <View style={styles.actionUnlike}>
                     <AntDesign size={22} name={'hearto'} color={'#ffffff'} />
                   </View>
                 </TouchableOpacity>
-                <Text style={styles.countLikes}>4,558</Text>
+                <Text style={styles.countLikes}>{props.news.likes}</Text>
               </View>
             ) : (
               <View style={styles.likeCountainer}>
-                <TouchableOpacity onPress={() => setIsLiked(true)}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsLiked(true);
+                    likeNews(props.news.id);
+                  }}>
                   <View style={styles.actionLike}>
                     <AntDesign size={22} name={'hearto'} />
                   </View>
                 </TouchableOpacity>
-                <Text style={styles.countLikes}>4,558</Text>
+                <Text style={styles.countLikes}>{props.news.likes}</Text>
               </View>
             )}
 
-            <TouchableOpacity onPress={goToComment}>
+            <TouchableOpacity onPress={() => goToComment(props.news.id)}>
               <View style={styles.actionComment}>
                 <Ionicons size={22} name={'chatbubble-outline'} />
               </View>
@@ -87,7 +104,7 @@ const NewsCard = props => {
             </Text>
           </HitSlopTouchableOpacity>
         )}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => goToComment(props.news.id)}>
           <Text style={styles.created_at}>Voir les commentaires</Text>
         </TouchableOpacity>
       </View>

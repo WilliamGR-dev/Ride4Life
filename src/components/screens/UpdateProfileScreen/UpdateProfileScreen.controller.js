@@ -77,6 +77,7 @@ const useController = ({}) => {
     setEmail,
     addPicture,
     isSubmitting,
+    picture,
     submit,
   };
 };

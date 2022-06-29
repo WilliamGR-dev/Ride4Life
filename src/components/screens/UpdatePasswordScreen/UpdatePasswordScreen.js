@@ -14,7 +14,7 @@ import {useSelector} from 'react-redux';
 import FallingModal from '../../modals/FallingModal/FallingModal';
 
 const UpdateProfileScreen = props => {
-  const {passwordConfirm, setpasswordConfirm, password, setPassword} =
+  const {passwordConfirm, setPasswordConfirm, password, setPassword, submit} =
     useController(props);
   const isFalling = useSelector(s => s.isFalling);
 
@@ -24,7 +24,7 @@ const UpdateProfileScreen = props => {
       <View style={styles.postHeader}>
         <BackPressButton color={'#ffffff'} />
         <Text style={styles.title}>Modifier mon mot de passe</Text>
-        <TouchableOpacity style={styles.check}>
+        <TouchableOpacity style={styles.check} onPress={() => submit()}>
           <Feather name={'save'} size={32} color={'#ffffff'} />
         </TouchableOpacity>
       </View>
@@ -41,7 +41,7 @@ const UpdateProfileScreen = props => {
         style={styles.form}
         value={passwordConfirm}
         onChangeText={value => {
-          setpasswordConfirm(value);
+          setPasswordConfirm(value);
         }}
         placeholder="Confirmation mot de passe"
         label="Confirmation mot de passe"

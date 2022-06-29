@@ -13,6 +13,7 @@ const useController = ({}) => {
       return;
     }
 
+    console.log(res.content);
     setData(res.content);
 
     // setData(res.content.results);

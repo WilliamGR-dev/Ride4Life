@@ -1,6 +1,7 @@
 import {useCallback, useEffect, useState} from 'react';
 import imagePickerHelper from '../../../helpers/imagePickerHelper';
-import {useRefresh} from '../../../hooks';
+import {useNavigator, useRefresh} from '../../../hooks';
+import apiHelper from '../../../helpers/apiHelper';
 
 const useController = ({}) => {
   const [data, setData] = useState();
@@ -8,11 +9,15 @@ const useController = ({}) => {
     {input: '', placeId: ''},
     {input: '', placeId: ''},
   ]);
+
+  const {goBack} = useNavigator();
+
   const [isMore, setIsMore] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [numOfLines, setNumOfLines] = useState(0);
   const [picture, setPicture] = useState();
   const [description, setDescription] = useState('');
+  const [shortDescription, setShortDescription] = useState('');
   const [predictions, setPredictions] = useState([]);
   const [InputSelected, setInputSelected] = useState();
   const [showMapPreview, setShowMapPreview] = useState(false);
@@ -185,6 +190,24 @@ const useController = ({}) => {
     [InputSelected, initialRegion, roadTrip],
   );
 
+  const submit = useCallback(async () => {
+    const res = await apiHelper.postRoads(
+      title,
+      description,
+      shortDescription,
+      roadTrip,
+    );
+    if (res.status !== 201) {
+      return false;
+    }
+    goBack();
+  }, [description, roadTrip, shortDescription, title]);
+
+  useEffect(() => {
+    //-- Mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     //-- Mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -202,8 +225,6 @@ const useController = ({}) => {
     onTextLayout,
     isLiked,
     setIsLiked,
-    description,
-    setDescription,
     title,
     setTitle,
     roadTrip,
@@ -222,6 +243,11 @@ const useController = ({}) => {
     waypoint,
     initialRegion,
     markerCoordinates,
+    shortDescription,
+    setShortDescription,
+    description,
+    setDescription,
+    submit,
   };
 };
 

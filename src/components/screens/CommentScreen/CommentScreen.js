@@ -28,9 +28,11 @@ import NewsCard from '../../cards/NewsCard/NewsCard';
 import CommentsCard from '../../cards/CommentsCard/CommentsCard';
 import FallingModal from '../../modals/FallingModal/FallingModal';
 import {useSelector} from 'react-redux';
+import AuthTextInput from '../../inputs/AuthTextInput/AuthTextInput';
 
-const CommentScreen = props => {
-  const {data, refreshing, onRefresh} = useController(props);
+const CommentScreen = ({route, navigation}) => {
+  const {data, refreshing, onRefresh, postComment, comment, setComment} =
+    useController(route.params.news_id);
 
   const isFalling = useSelector(s => s.isFalling);
   if (!data) {
@@ -38,7 +40,7 @@ const CommentScreen = props => {
   }
 
   const renderItem = ({item}) => {
-    return <CommentsCard />;
+    return <CommentsCard comment={item} />;
   };
 
   return (
@@ -66,8 +68,17 @@ const CommentScreen = props => {
           }}
         />
         <TextInput
+          value={comment}
+          onChangeText={setComment}
           placeholderTextColor={'#929292'}
           placeholder={'Ecrivez un message...'}
+        />
+        <SubmitButton
+          onPress={postComment}
+          label={'Envoyer'}
+          width={'40%'}
+          light_outline
+          text_outline
         />
       </View>
     </View>

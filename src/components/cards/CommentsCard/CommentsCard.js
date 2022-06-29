@@ -15,6 +15,7 @@ const CommentsCard = props => {
   const {isMore, setIsMore, numOfLines, onTextLayout, isLiked, setIsLiked} =
     useController(props);
 
+  console.log(props);
   return (
     <View>
       <View style={styles.owner}>
@@ -25,13 +26,11 @@ const CommentsCard = props => {
           }}
         />
         <View style={styles.container}>
-          <Text style={styles.username}>Spartan_25</Text>
-          <Text style={styles.cardText}>
-            Integer vitae nunc nisi. Vivamus sollicitudin nisl eu elit
-            tristique, id ullamcorper nibh faucibus. Integer egestas in turpis
-            at pellentesque. In nec elementum magna, quis rutrum tellus.
+          <Text style={styles.username}>{props.comment.user_id}</Text>
+          <Text style={styles.cardText}>{props.comment.text}</Text>
+          <Text style={styles.created_at}>
+            {moment.duration(props.comment.created_at).humanize()}
           </Text>
-          <Text style={styles.created_at}>il y a 2 heures</Text>
         </View>
       </View>
     </View>

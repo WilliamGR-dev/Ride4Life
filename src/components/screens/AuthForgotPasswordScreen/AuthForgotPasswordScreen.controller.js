@@ -12,18 +12,16 @@ const useController = ({}) => {
   const [isSubmitting, preventMultipleSubmit] = usePreventMultipleSubmit();
 
   const submit = useCallback(async () => {
-    await preventMultipleSubmit(async () => {
-      const res = await apiHelper.forgottenPassword(email);
+    const res = await apiHelper.forgottenPassword(email);
 
-      if (res.status !== 200) {
-        return setHasError(true);
-      }
+    if (res.status !== 200) {
+      return setHasError(true);
+    }
 
-      await alertHelper.informForgotPasswordMailSent();
+    await alertHelper.informForgotPasswordMailSent();
 
-      goBack();
-    });
-  }, [email, goBack, preventMultipleSubmit]);
+    goBack();
+  }, [email, goBack]);
 
   return {email, setEmail, hasError, submit, isSubmitting};
 };

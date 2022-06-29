@@ -28,8 +28,10 @@ import FallingModal from '../../modals/FallingModal/FallingModal';
 import {useNavigator} from '../../../hooks';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
-const RoadScreen = props => {
-  const {data, refreshing, onRefresh} = useController(props);
+const RoadScreen = ({route, navigation}) => {
+  const {data, refreshing, onRefresh, submit} = useController(
+    route.params.road_id,
+  );
   const isFalling = useSelector(s => s.isFalling);
   const {goToMemberRoad} = useNavigator();
 
@@ -54,7 +56,7 @@ const RoadScreen = props => {
           colors={['rgba(255,255,255,0.1)', '#000000']}
           style={styles.linearGradient}>
           <BackPressButton color={'#ffffff'} />
-          <Text style={styles.cardTitle}>{data.title}</Text>
+          {data && <Text style={styles.cardTitle}>{data.title}</Text>}
           <View style={styles.roadInformation}>
             <Text style={styles.cardDistance}>
               <MaterialCommunityIcons name={'map-marker-distance'} size={20} />{' '}
@@ -72,14 +74,14 @@ const RoadScreen = props => {
           </View>
           <Text style={styles.cardSubtitle}>
             <Feather name={'user'} size={20} />
-            {data.owner}
+            {data.user_id}
           </Text>
-          <Text style={styles.cardSubtitle}>{data.message}</Text>
+          <Text style={styles.cardSubtitle}>{data.short_description}</Text>
           <View style={styles.entrantCountainer}>
             <View style={styles.entrants}>
               <TouchableOpacity
                 style={styles.entrants}
-                onPress={goToMemberRoad}>
+                onPress={() => goToMemberRoad(route.params.road_id)}>
                 <Image
                   style={styles.profilePicture}
                   source={{
@@ -103,7 +105,12 @@ const RoadScreen = props => {
                 </View>
               </TouchableOpacity>
             </View>
-            <SubmitButton width={150} label={'REJOINDRE'} road_trip />
+            <SubmitButton
+              width={150}
+              label={'REJOINDRE'}
+              onPress={submit}
+              road_trip
+            />
           </View>
         </LinearGradient>
       </ImageBackground>

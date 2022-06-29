@@ -18,8 +18,8 @@ import BackPressButton from '../../buttons/BackPressButton/BackPressButton';
 import FallingModal from '../../modals/FallingModal/FallingModal';
 import {useSelector} from 'react-redux';
 
-const MemberRoadScreen = props => {
-  const {data, refreshing, onRefresh} = useController(props);
+const MemberRoadScreen = ({route, navigation}) => {
+  const {data, refreshing, onRefresh} = useController(route.params.road_id);
 
   const isFalling = useSelector(s => s.isFalling);
   if (!data) {

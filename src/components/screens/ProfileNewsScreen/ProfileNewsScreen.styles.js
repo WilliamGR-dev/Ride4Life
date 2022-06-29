@@ -5,8 +5,6 @@ const avatarWidth = 180;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    height: '100%',
-    bottom: 1,
     backgroundColor: '#242D3C',
   },
   header: {
@@ -39,6 +37,9 @@ const styles = StyleSheet.create({
   stat: {
     marginHorizontal: 10,
   },
+  list: {
+    flex: 1,
+  },
   stat_text: {
     textAlign: 'center',
     marginBottom: 5,
@@ -51,21 +52,15 @@ const styles = StyleSheet.create({
   },
   account_container: {
     flex: 1,
-    flexDirection: 'row',
-    width: '100%',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   news: {
     marginTop: 40,
     width: '32.5%',
-    height: '32.5%',
+    height: 140,
     margin: 1,
   },
   news_image: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
   },
   button_container: {
     paddingVertical: 10,
